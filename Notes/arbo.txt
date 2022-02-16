@@ -1,0 +1,18 @@
+include : 
+|	grid.h: créer grille , 
+|	manual.h : afficher grille
+|	auto.h
+|	menu.h
+|	stats.h
+
+
+src : 
+|	grid.c
+|	manual.c
+|	auto.c
+|	menu.c
+|	stats.c
+|	main.c
+	
+
+lib :

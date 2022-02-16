@@ -1,0 +1,20 @@
+grille : tableau de tableau (tab 2 dimensions)
+
+sommet: struct sommet(i,j){
+
+	flag: bool
+	mine : bool
+	découvert: bool
+}
+	
+Besoin de pointeur, Exemple: 
+
+main{
+struct sommet s00(0,0);
+struct sommet *p00 = &s00;
+}
+
+autre_fonction{
+	if(p00->découvert == ?) ... ;
+}
+
