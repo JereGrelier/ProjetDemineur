@@ -1,3 +1,21 @@
+#ifndef GRID_H
+#define GRID_H
+#include <stdlib.h>
+#define VRAI 1
+#define FAUX 0
+typedef int BOOLEAN;
+
+
+/**
+ * @brief The cell structure
+ * 
+ */
+struct sommet
+{
+    BOOLEAN marked;
+    BOOLEAN flagged;
+    BOOLEAN discovered;
+};
 
 /**
  * @brief Create a Grid
@@ -6,7 +24,7 @@
  * @param w Width
  * @return the grid 
  */
-void * CreateGrid(int h, int w);
+struct sommet **CreateGrid(int h, int w);
 
 /**
  * @brief Display the grid
@@ -15,11 +33,15 @@ void * CreateGrid(int h, int w);
  * @param w width
  * @param grid the grid
  */
-void DisplayGrid(int **grid, int h, int w);
+void DisplayGrid(struct sommet **grid, int h, int w);
 
 /**
  * @brief Delete the grid
  * 
  * @param grid the grid to delete
  */
-void DeleteGrid(int **grid);
+void DeleteGrid(struct sommet **grid);
+
+
+
+#endif

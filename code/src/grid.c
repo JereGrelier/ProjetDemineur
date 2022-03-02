@@ -1,19 +1,30 @@
+#include <stdlib.h>
 #include "../include/grid.h"
+#include <stdio.h>
 
-void * CreateGrid(int w, int h) {
-    int grid[w][h];
-    return grid
+struct sommet *CreateGrid(struct sommet grid) {
+    struct sommet grid[w][h];
+    return *grid;
 }
 
-void DisplayGrid(int **grid, int w, int h) {
-    for (size_t i = 0; i < h; i++)
+void DisplayGrid(struct sommet grid, int w, int h) {
+    for (int i = 0; i < h; i++)
     {
-        printf(|);
-        for (size_t j = 0; j < w; i++)
+        printf("|");
+        for (int j = 0; j < w; i++)
         {
-            printf(%d,grid[j][i])
+            printf("%d |",grid[j][i]);
         }
-        
     }
     
+}
+
+void main() {
+    struct sommet firstGrid[4][2] = {
+        {1,3},
+        {3,6},
+        {5,9},
+        {0,34},
+    };
+    DisplayGrid(&firstGrid, 4, 2);
 }
