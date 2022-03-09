@@ -14,7 +14,7 @@ bin/%.o : src/%.c include/grid.h
 	gcc $(CFLAGS) -c $< -o $@ -fpic
 
 clean:
-	rm -rf game && cd bin && rm -rf *;
+	rm -rf grid && cd bin && rm -rf *;
 
 
 libmat: lib/libmat.a bin/matrix.o bin/vector.o

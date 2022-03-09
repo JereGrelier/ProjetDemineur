@@ -4,6 +4,8 @@
 #define VRAI 1
 #define FAUX 0
 typedef int BOOLEAN;
+typedef struct sommet sommet;
+typedef struct grid grid;
 
 
 /**
@@ -12,10 +14,25 @@ typedef int BOOLEAN;
  */
 struct sommet
 {
+    int voisinage;
     BOOLEAN marked;
     BOOLEAN flagged;
     BOOLEAN discovered;
+    struct sommet *next;
 };
+
+/**
+ * @brief The grid structure
+ * @param w Width
+ * @param h Height
+ */
+struct grid
+{
+    int w;
+    int h;
+    struct sommet *firstSommet;
+};
+
 
 /**
  * @brief Create a Grid
@@ -24,16 +41,14 @@ struct sommet
  * @param w Width
  * @return the grid 
  */
-struct sommet **CreateGrid(int h, int w);
+grid *CreateGrid(int h, int w);
 
 /**
  * @brief Display the grid
  * 
- * @param h Height
- * @param w width
  * @param grid the grid
  */
-void DisplayGrid(struct sommet **grid, int h, int w);
+void DisplayGrid(grid *grid);
 
 /**
  * @brief Delete the grid
