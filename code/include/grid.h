@@ -15,9 +15,10 @@ typedef struct grid grid;
 struct sommet
 {
     int voisinage;
-    BOOLEAN marked;
+    BOOLEAN mined;
     BOOLEAN flagged;
     BOOLEAN discovered;
+    int coor[2];
     struct sommet *next;
 };
 
@@ -44,6 +45,15 @@ struct grid
 grid *CreateGrid(int h, int w);
 
 /**
+ * @brief Verify the surrondings of a cell
+ * 
+ * @param mySommet The cell selected
+ * @param myGrid The grid
+ * @return How much mines are around the cell passed in parameter
+ */
+void *getSurrond(sommet *mySommet, grid *myGrid);
+
+/**
  * @brief Display the grid
  * 
  * @param grid the grid
@@ -57,6 +67,18 @@ void DisplayGrid(grid *grid);
  */
 void DeleteGrid(struct sommet **grid);
 
+/**
+ * @brief Reveal a cell
+ * 
+ * @param mySommet The cell to reveal
+ */
+void * Reveal(int h, int w, grid* myGrid);
 
+/**
+ * @brief Temp Fuction to test reveal
+ * 
+ * @param myGrid the grid
+ */
+void handleLoose(grid *myGrid);
 
 #endif
