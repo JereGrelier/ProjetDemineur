@@ -1,8 +1,4 @@
 .history
 *.o
 test/*
-<<<<<<< HEAD
 .vscode/*.log
-=======
-.vscode
->>>>>>> 70d0c5f6efed90d12fe4c1f14532fb520c7876a3
