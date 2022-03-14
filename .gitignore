@@ -1,4 +1,4 @@
 .history
 *.o
 test/*
-.vscode
+.vscode/*.log
