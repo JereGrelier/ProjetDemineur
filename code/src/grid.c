@@ -2,7 +2,7 @@
  * @file grid.c
  * @author Jeremy Grelier (jeremy.grelier@enseirb-matmeca.fr)
  * @brief The source file for the grid and cells
- * @version 0.1
+ * @version 0.5
  * @date 2022-03-09
  * 
  * @copyright Copyright (c) 2022
@@ -14,11 +14,26 @@
 #include <stdio.h>
 #include <time.h>
 
-
 //TODO Complete function
 void *getSurrond(sommet *mySommet, grid *myGrid) {
-    int res = 0;
-    mySommet->voisinage = res;
+    sommet *currentSommet = myGrid->firstSommet;
+    //DEBUG VAR
+    int a = mySommet->coor[0];
+    int b = mySommet->coor[1];
+    int c = currentSommet->coor[0];
+    int d = currentSommet->coor[1];
+    //FIN DEBUG VAR
+    while (currentSommet->next != NULL)
+    {
+        if ((currentSommet->next == mySommet || mySommet->next==currentSommet) && currentSommet->coor[0] == mySommet->coor[0])
+        {
+            if(currentSommet->mined == VRAI)
+                mySommet->voisinage+=1;
+        }
+        currentSommet = currentSommet->next;
+        c = currentSommet->coor[0];
+        d = currentSommet->coor[1];
+    }
 }
 
 grid *CreateGrid(int h, int w) {
@@ -30,8 +45,6 @@ grid *CreateGrid(int h, int w) {
     {
         exit(EXIT_FAILURE);
     }
-
-    firstSommet->voisinage = 0;
     srand(time(NULL));
     sommet *actualSommet = firstSommet;
     firstSommet->next = actualSommet;
@@ -42,10 +55,8 @@ grid *CreateGrid(int h, int w) {
             actualSommet->coor[0] = i;
             actualSommet->coor[1] = j;
             actualSommet->mined = rand() % 2;
-            actualSommet->flagged = rand() % 2;
-            actualSommet->discovered = rand() % 2;
-            actualSommet->voisinage = rand() % 10;
-            //getSurrond(actualSommet, myGrid);
+            actualSommet->flagged = FAUX;
+            actualSommet->discovered = FAUX;
             actualSommet->next = malloc(sizeof(*actualSommet));
             actualSommet = actualSommet->next;
         }
@@ -53,6 +64,11 @@ grid *CreateGrid(int h, int w) {
     myGrid->firstSommet = firstSommet;
     myGrid->h = h;
     myGrid->w = w;
+    actualSommet = firstSommet;
+    while (actualSommet->next != NULL) {
+        getSurrond(actualSommet, myGrid);
+        actualSommet = actualSommet->next;
+    }
     return myGrid;
 }
 
@@ -61,22 +77,28 @@ void DisplayGrid(grid *myGrid) {
     {
         exit(EXIT_FAILURE);
     }
+    printf("    y -->\n");
     sommet *actuel = myGrid->firstSommet;
     for (int i = 0; i < myGrid->h; i++)
     {
-        printf("|");
+        printf("x=%d |", i+1);
         for (int j = 0; j < myGrid->w; j++)
         {
-            if (actuel->discovered == FAUX)
+            if (actuel->flagged == VRAI)
+            {
+                printf("\033[1;38;5;46m");
+                printf("F");
+                printf("\033[0m|");
+            }
+            else if (actuel->discovered == FAUX)
             {
                 printf("?|");
             }
-            else if (actuel->flagged == VRAI)
-            {
-                printf("F|");
-            }
+            
             else if (actuel->mined == VRAI) {
-                printf("*|");
+                printf("\033[1;31m");
+                printf("*");
+                printf("\033[0m|");
             }
             else {
                 printf("%d|", actuel->voisinage);
@@ -106,6 +128,24 @@ void * Reveal(int h, int w, grid* myGrid) {
     DisplayGrid(myGrid);
 }
 
+void checkWin(grid *myGrid) {
+    sommet *currentSommet = myGrid->firstSommet;
+    while (currentSommet->next != NULL)
+    {
+        if(currentSommet->discovered == FAUX && currentSommet->mined == VRAI){
+            currentSommet = currentSommet->next;
+            continue;
+        }
+        if(currentSommet->discovered == FAUX && currentSommet->mined == FAUX){
+            return;
+        }
+        currentSommet = currentSommet->next;
+    }
+    printf("You Win\n");
+    _Exit(0);
+    
+}
+
 //TMP : To remove and set in end...
 void handleLoose(grid *myGrid) {
     printf("You lost\n");
@@ -120,16 +160,71 @@ void handleLoose(grid *myGrid) {
     _Exit(0);
 }
 
-void main() {
-        grid *myGrid = CreateGrid(5,5);
-        DisplayGrid(myGrid);
-        int x, y;
-        while (VRAI)
-        {
+int checkInt() {
+    char tmp;
+    int res = 0;
+    
+    while(res == 0) {
+        scanf("%s", &tmp);
+        res = atoi(&tmp);
+        if(res == 0)
+            printf("Not a valid number, please retry\n==>");
+    }
+    return res;
+}
+
+void flagCell(grid * myGrid) {
+    printf("Do you want to flag a cell\n1. No\n2. Yes\n==> ");
+    int a = checkInt();
+    switch (a) {
+        case 1:
+            return;
+        case 2: {
+            printf("Flagging...\n");
             printf("x? ==>"); 
-            scanf("%d", &x);
+            int x = checkInt();
             printf("\ny? ==>");
-            scanf("%d", &y);
-            Reveal(x,y, myGrid);
+            int y = checkInt();
+            sommet * actual = myGrid->firstSommet;
+            while (actual->next != NULL) {
+                if (actual->coor[0] == x && actual->coor[1] == y)
+                    break;
+                actual = actual->next;
+            } 
+            actual->flagged = VRAI;
+            DisplayGrid(myGrid);
+            break;
         }
+        default:
+            break;
+    }
+    flagCell(myGrid);
+}
+
+void main() {
+    int h, w = 0;
+    char tmp;
+    printf("SIZE OF THE GRID : \n");
+    printf("x? ==>"); 
+    h = checkInt();
+    printf("y? ==>");
+    w = checkInt();
+    grid *myGrid = CreateGrid(h,w);
+    DisplayGrid(myGrid);
+    int x, y;
+    sommet *currentSommet = myGrid->firstSommet;
+    while (VRAI)
+    {
+        system("clear");
+        char c = getchar();
+        if(c == 'f')
+            flagCell(myGrid);
+        DisplayGrid(myGrid);
+        printf("x? ==>"); 
+        x = checkInt();
+        printf("\ny? ==>");
+        y = checkInt();
+        Reveal(x,y, myGrid);
+        checkWin(myGrid);
+    }
 }

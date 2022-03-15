@@ -81,4 +81,18 @@ void * Reveal(int h, int w, grid* myGrid);
  */
 void handleLoose(grid *myGrid);
 
+/**
+ * @brief Check if the grid has been fully discovered
+ * 
+ * @param myGrid The grid
+ */
+void checkWin(grid *myGrid);
+
+/**
+ * @brief Check whether an input is an integer or not
+ * 
+ * @return The integer 
+ */
+int checkInt();
+
 #endif
