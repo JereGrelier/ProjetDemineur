@@ -35,9 +35,9 @@ grid *CreateGrid(int h, int w) {
     srand(time(NULL));
     sommet *actualSommet = firstSommet;
     firstSommet->next = actualSommet;
-    for (int i = 0; i < h; i++)
+    for (int i = 1; i <= h; i++)
     {
-        for (size_t j = 0; j < w; j++)
+        for (size_t j = 1; j <= w; j++)
         {
             actualSommet->coor[0] = i;
             actualSommet->coor[1] = j;
@@ -67,11 +67,11 @@ void DisplayGrid(grid *myGrid) {
         printf("|");
         for (int j = 0; j < myGrid->w; j++)
         {
-            if (actuel->discovered == 0)
+            if (actuel->discovered == FAUX)
             {
                 printf("?|");
             }
-            else if (actuel->flagged == 1)
+            else if (actuel->flagged == VRAI)
             {
                 printf("F|");
             }
@@ -120,9 +120,16 @@ void handleLoose(grid *myGrid) {
     _Exit(0);
 }
 
-int main() {
+void main() {
         grid *myGrid = CreateGrid(5,5);
         DisplayGrid(myGrid);
-        Reveal(3,2, myGrid);
-        return 0;
+        int x, y;
+        while (VRAI)
+        {
+            printf("x? ==>"); 
+            scanf("%d", &x);
+            printf("\ny? ==>");
+            scanf("%d", &y);
+            Reveal(x,y, myGrid);
+        }
 }
