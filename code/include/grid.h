@@ -74,11 +74,19 @@ void DeleteGrid(struct sommet **grid);
 void * Reveal(int h, int w, grid* myGrid);
 
 /**
- * @brief Temp Fuction to test reveal
+ * @brief Temp Fuction to loose ==> Move to end
  * 
  * @param myGrid the grid
  */
 void handleLoose(grid *myGrid);
+
+
+/**
+ * @brief Temp Fuction to Win ==> Move to end
+ * 
+ * @param myGrid the grid
+ */
+void handleWin(grid *myGrid);
 
 /**
  * @brief Check if the grid has been fully discovered

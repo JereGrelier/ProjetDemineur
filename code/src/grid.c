@@ -131,6 +131,37 @@ void * Reveal(int h, int w, grid* myGrid) {
     DisplayGrid(myGrid);
 }
 
+
+
+
+//TMP : To remove and set in end...
+void handleWin(grid *myGrid) {
+    sommet *currentSommet = myGrid->firstSommet; 
+    while (currentSommet->next != NULL) {
+        if (currentSommet->discovered == FAUX)
+            currentSommet->flagged =VRAI;
+        currentSommet = currentSommet->next;
+    }
+    system("clear");
+    DisplayGrid(myGrid);
+    printf("You Win\n");
+    system("paplay ../assets/GG.wav");
+    _Exit(0);
+}
+
+void handleLoose(grid *myGrid) {
+    printf("You lost\n");
+    sommet * actual = myGrid->firstSommet;
+    while (actual->next != NULL) {
+        actual->discovered = VRAI;
+        actual->flagged = FAUX;
+        actual = actual->next;
+    }
+    printf("Here is the full grid\n");
+    DisplayGrid(myGrid);
+    _Exit(0);
+}
+
 void checkWin(grid *myGrid) {
     sommet *currentSommet = myGrid->firstSommet;
     while (currentSommet->next != NULL)
@@ -144,23 +175,8 @@ void checkWin(grid *myGrid) {
         }
         currentSommet = currentSommet->next;
     }
-    printf("You Win\n");
-    _Exit(0);
+    handleWin(myGrid);
     
-}
-
-//TMP : To remove and set in end...
-void handleLoose(grid *myGrid) {
-    printf("You lost\n");
-    sommet * actual = myGrid->firstSommet;
-    while (actual->next != NULL) {
-        actual->discovered = VRAI;
-        actual->flagged = FAUX;
-        actual = actual->next;
-    }
-    printf("Here is the full grid\n");
-    DisplayGrid(myGrid);
-    _Exit(0);
 }
 
 int checkInt() {
@@ -219,10 +235,8 @@ void main() {
     while (VRAI)
     {
         system("clear");
-        char c = getchar();
-        if(c == 'f')
-            flagCell(myGrid);
         DisplayGrid(myGrid);
+        flagCell(myGrid);
         printf("x? ==>"); 
         x = checkInt();
         printf("\ny? ==>");
