@@ -3,3 +3,5 @@
 test/*
 .vscode/*.log
 code/src/grid
+code/doc/html
+code/doc/latex
