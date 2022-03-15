@@ -14,18 +14,21 @@
 #include <stdio.h>
 #include <time.h>
 
+
 //TODO Complete function
-void *getSurrond(sommet *mySommet, grid *myGrid) {
+void getSurrond(sommet *mySommet, grid *myGrid) {
+    if (mySommet->mined)
+        return;
     sommet *currentSommet = myGrid->firstSommet;
-    //DEBUG VAR
     int a = mySommet->coor[0];
     int b = mySommet->coor[1];
     int c = currentSommet->coor[0];
     int d = currentSommet->coor[1];
-    //FIN DEBUG VAR
     while (currentSommet->next != NULL)
     {
-        if ((currentSommet->next == mySommet || mySommet->next==currentSommet) && currentSommet->coor[0] == mySommet->coor[0])
+        if ((currentSommet->next == mySommet || mySommet->next==currentSommet) && c == a
+        || (c - 1 == a || c + 1 == a) && d == b
+        || (a==c-1 && b==d-1 || a==c+1 && b==d+1 || a==c-1 && b==d+1 || a==c+1 && b==d-1))
         {
             if(currentSommet->mined == VRAI)
                 mySommet->voisinage+=1;

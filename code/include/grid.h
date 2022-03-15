@@ -49,9 +49,8 @@ grid *CreateGrid(int h, int w);
  * 
  * @param mySommet The cell selected
  * @param myGrid The grid
- * @return How much mines are around the cell passed in parameter
  */
-void *getSurrond(sommet *mySommet, grid *myGrid);
+void getSurrond(sommet *mySommet, grid *myGrid);
 
 /**
  * @brief Display the grid
