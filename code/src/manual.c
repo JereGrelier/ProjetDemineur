@@ -58,6 +58,11 @@ void flagCell(grid * myGrid) {
     flagCell(myGrid);
 }
 
+void handleFlag(){
+
+    
+}
+
 void handleWin(grid *myGrid) {
     sommet *currentSommet = myGrid->firstSommet; 
     while (currentSommet->next != NULL) {

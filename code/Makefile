@@ -16,10 +16,6 @@ bin/%.o : src/%.c include/grid.h include/manual.h
 clean:
 	rm -rf grid && cd bin && rm -rf *;
 
-
-libmine: lib/libmat.a bin/matrix.o bin/vector.o
-	ar crs  $^
-
 dynlibmine: bin/grid.o 
 	gcc -shared $^ -o lib/libmine.so
 

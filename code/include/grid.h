@@ -1,6 +1,7 @@
 #ifndef GRID_H
 #define GRID_H
 #include <stdlib.h>
+//#include <bool.h>
 #define VRAI 1
 #define FAUX 0
 typedef int BOOLEAN;

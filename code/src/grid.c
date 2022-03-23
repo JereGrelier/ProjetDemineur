@@ -87,18 +87,18 @@ void DisplayGrid(grid *myGrid) {
         printf("x=%d |", i+1);
         for (int j = 0; j < myGrid->w; j++)
         {
-            if (actuel->flagged == VRAI)
+            if (actuel->flagged)
             {
                 printf("\033[1;38;5;46m");
                 printf("F");
                 printf("\033[0m|");
             }
-            else if (actuel->discovered == FAUX)
+            else if (!actuel->discovered)
             {
                 printf("?|");
             }
             
-            else if (actuel->mined == VRAI) {
+            else if (actuel->mined) {
                 printf("\033[1;31m");
                 printf("*");
                 printf("\033[0m|");
