@@ -13,18 +13,15 @@
 #include "../include/manual.h"
 
 //Global variables
-int height;
-int width;
-sommet grid[height][width];
+Grid grid;
 
 void Reveal(int h, int w) {
-    printf("Revealing the cell at %d ; %d\n", h, w);
-    sommet *mySommet = grid[h][w];        
-    if (mySommet->mined)
+    printf("Revealing the cell at %d ; %d\n", h, w);      
+    if (grid.sommet[h][w].mined)
     {
         handleLoose();
     }
-    mySommet->state = 1;
+    grid.sommet[h][w].state = 1;
     DisplayGrid();
 }
 
@@ -52,9 +49,8 @@ void flagCell() {
 }
 
 void handleFlag(int h, int w){
-    sommet *MySommet = grid[h][w];
-    if(MySommet->state != 2)
-        MySommet->state = 2;
+    if(grid.sommet[h][w].state != 2)
+        grid.sommet[h][w].state = 2;
 }
 
 void PrintWin() {
@@ -74,12 +70,11 @@ void handleLoose() {
 }
 
 void RevealAll(){
-    for (int i = 0; i < height; i++)
+    for (int i = 0; i < grid.height; i++)
     {
-        for (int j = 0; j < width; j++)
+        for (int j = 0; j < grid.width; j++)
         {
-            sommet *MySommet = grid[i][j];
-            MySommet->state = 1;
+            grid.sommet[i][j].state = 1;
         }
         
     }

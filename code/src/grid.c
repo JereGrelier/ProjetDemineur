@@ -16,63 +16,103 @@
 #include "../include/menu.h"
 
 //Global Variables
-int height;
-int width;
-sommet grid[height][width];
+
+Grid grid;
 
 
 //TODO Complete function
-void getSurrond(sommet *mySommet) {
-    if (mySommet->mined)
-        return;
+void getNbSurrondingMines(int h, int w) {
+   
+    for (int i = 0; i < h; i++)
+    {
+        for (int j = 0; j < w; j++)
+        {
+            if (grid.sommet[i][j].mined)
+                break;
+            else
+            {
+                grid.sommet[i][j].nbMineAround ++;
+            }
+            
+        }
+        
+    }
+    
+    
 }
 
-void CreateGrid(int h, int w) {
-    sommet *MySommet;
-    srand(time(NULL));
-    for (int i = 1; i <= h; i++)
+void CreateGrid(int h, int w, int nbMines) {
+    grid.height = h;
+    grid.width = w;
+    grid.nbMines = nbMines;
+    grid.sommet = (sommet **)malloc(grid.height * sizeof(sommet *));
+    printf("H : %d\n W : %d\n NbMines : %d\n", grid.height, grid.width, grid.nbMines);
+    int minesToPlace = nbMines;
+    for (int i = 1; i <= grid.height; i++)
     {
-        for (size_t j = 1; j <= w; j++)
+        grid.sommet[i] = (sommet *)malloc(grid.width * sizeof(sommet));
+        for (int j = 1; j <= grid.width; j++)
         {
-            MySommet->mined = rand() % 2;
-            MySommet->state = 0;
-            grid[i][j] = MySommet;
+            grid.sommet[i][j] = createSommet(minesToPlace);             
         }
     }
+    placeMines(nbMines);
+    getNbSurrondingMines(h,w);
     return;
 }
 
-void DisplayGrid() {
-    if (grid == NULL)
+sommet createSommet(int minesToPlace) {
+    sommet s = {
+            .mined = false,
+            .state = 0,
+            };
+    return s;
+}
+
+void placeMines(int nbMines) {
+    srand(time(NULL));
+    while (nbMines)
     {
-        exit(EXIT_FAILURE);
+        for (int i = 1; i <= grid.height; i++)
+        {
+            for (int j = 1; j <= grid.width; j++)
+            {
+                if (!grid.sommet[i][j].mined)
+                {
+                    grid.sommet[i][j].mined = rand() % 2 ? true : false;
+                    nbMines--;
+                }
+            }
+        }
     }
+}
+
+void DisplayGrid() {
     printf("    y -->\n");
     
-    for (int i = 0; i < height; i++)
+    for (int i = 0; i < grid.height; i++)
     {
         printf("x=%d |", i+1);
-        for (int j = 0; j < width; j++)
+        for (int j = 0; j < grid.width; j++)
         {
-            sommet mySommet = grid[i][j]; 
-            if (mySommet.state == 2)
+            if (grid.sommet[i][j].state == 2)
             {
                 printf("\033[1;38;5;46m");
                 printf("F");
                 printf("\033[0m|");
             }
-            else if (!mySommet.state)
+            else if (!grid.sommet[i][j].state)
             {
                 printf("?|");
             }
             
-            else if (mySommet.mined) {
+            else if (grid.sommet[i][j].mined) {
                 printf("\033[1;31m");
                 printf("*");
                 printf("\033[0m|");
             }
             else {
-                printf("%d|", mySommet.nbMineAround);
+                printf("%d|", grid.sommet[i][j].nbMineAround);
             }
         }
         printf("\n");

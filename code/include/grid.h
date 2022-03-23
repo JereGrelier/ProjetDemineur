@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 typedef struct sommet sommet;
-
+typedef struct grid Grid;
 
 /**
  * @brief The cell structure
@@ -16,14 +16,37 @@ struct sommet
     int state; // 1 if discovered, 2 if flagged, 0 else
 };
 
+struct grid {
+    sommet ** sommet;
+    int height;
+    int width;
+    int nbMines;
+};
+
 /**
  * @brief Create a Grid
  * 
  * @param h Height
  * @param w Width
+ * @param nbMines Number of mines
  * @return the grid 
  */
-void CreateGrid(int h, int w);
+void CreateGrid(int h, int w, int nbMines);
+
+/**
+ * @brief Create a Sommet object
+ * 
+ * @param minesToPlace To check if there are still mines to place
+ * @return sommet 
+ */
+sommet createSommet(int minesToPlace);
+
+/**
+ * @brief Place randomly nbMines mines on the grid
+ * 
+ * @param nbMines 
+ */
+void placeMines(int nbMines);
 
 /**
  * @brief Verify the surrondings of a cell

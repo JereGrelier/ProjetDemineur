@@ -55,4 +55,5 @@ void handleFlag(int h, int w);
  */
 void Reveal(int h, int w);
 
+void RevealAll();
 #endif

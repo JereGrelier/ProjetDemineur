@@ -1,9 +1,8 @@
 #include "../include/manual.h"
 
-//Global Variables
 int height;
 int width;
-sommet grid[height][width];
+int nbMines;
 
 int main() {
     printf("SIZE OF THE GRID : \n");
@@ -11,7 +10,9 @@ int main() {
     height = checkInt();
     printf("y? ==>");
     width = checkInt();
-    CreateGrid(height,width);
+    printf("How many mines? ==>");
+    nbMines = checkInt();
+    CreateGrid(height, width, nbMines);
     DisplayGrid();
     int x, y;
     while (true)
