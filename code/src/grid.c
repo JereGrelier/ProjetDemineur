@@ -10,9 +10,9 @@
  */
 
 #include <stdlib.h>
-#include "../include/grid.h"
 #include <stdio.h>
 #include <time.h>
+#include "../include/grid.h"
 
 
 //TODO Complete function
@@ -113,71 +113,7 @@ void DisplayGrid(grid *myGrid) {
     }
 }
 
-void * Reveal(int h, int w, grid* myGrid) {
-    printf("Revealing the cell at %d ; %d\n", h, w);
-    sommet * actual = myGrid->firstSommet;
-    while (actual->next != NULL) {
-        if (actual->coor[0] == h && actual->coor[1] == w)
-            break;
-        actual = actual->next;
-    } 
-    
-    if (actual->mined == VRAI)
-    {
-        handleLoose(myGrid);
-    }
-    actual->flagged = FAUX;
-    actual->discovered = VRAI;
-    DisplayGrid(myGrid);
-}
 
-
-
-
-//TMP : To remove and set in end...
-void handleWin(grid *myGrid) {
-    sommet *currentSommet = myGrid->firstSommet; 
-    while (currentSommet->next != NULL) {
-        if (currentSommet->discovered == FAUX)
-            currentSommet->flagged =VRAI;
-        currentSommet = currentSommet->next;
-    }
-    system("clear");
-    DisplayGrid(myGrid);
-    printf("You Win\n");
-    system("paplay ../assets/GG.wav");
-    _Exit(0);
-}
-
-void handleLoose(grid *myGrid) {
-    printf("You lost\n");
-    sommet * actual = myGrid->firstSommet;
-    while (actual->next != NULL) {
-        actual->discovered = VRAI;
-        actual->flagged = FAUX;
-        actual = actual->next;
-    }
-    printf("Here is the full grid\n");
-    DisplayGrid(myGrid);
-    _Exit(0);
-}
-
-void checkWin(grid *myGrid) {
-    sommet *currentSommet = myGrid->firstSommet;
-    while (currentSommet->next != NULL)
-    {
-        if(currentSommet->discovered == FAUX && currentSommet->mined == VRAI){
-            currentSommet = currentSommet->next;
-            continue;
-        }
-        if(currentSommet->discovered == FAUX && currentSommet->mined == FAUX){
-            return;
-        }
-        currentSommet = currentSommet->next;
-    }
-    handleWin(myGrid);
-    
-}
 
 int checkInt() {
     char tmp;
@@ -190,58 +126,4 @@ int checkInt() {
             printf("Not a valid number, please retry\n==>");
     }
     return res;
-}
-
-void flagCell(grid * myGrid) {
-    printf("Do you want to flag a cell\n1. No\n2. Yes\n==> ");
-    int a = checkInt();
-    switch (a) {
-        case 1:
-            return;
-        case 2: {
-            printf("Flagging...\n");
-            printf("x? ==>"); 
-            int x = checkInt();
-            printf("\ny? ==>");
-            int y = checkInt();
-            sommet * actual = myGrid->firstSommet;
-            while (actual->next != NULL) {
-                if (actual->coor[0] == x && actual->coor[1] == y)
-                    break;
-                actual = actual->next;
-            } 
-            actual->flagged = VRAI;
-            DisplayGrid(myGrid);
-            break;
-        }
-        default:
-            break;
-    }
-    flagCell(myGrid);
-}
-
-void main() {
-    int h, w = 0;
-    char tmp;
-    printf("SIZE OF THE GRID : \n");
-    printf("x? ==>"); 
-    h = checkInt();
-    printf("y? ==>");
-    w = checkInt();
-    grid *myGrid = CreateGrid(h,w);
-    DisplayGrid(myGrid);
-    int x, y;
-    sommet *currentSommet = myGrid->firstSommet;
-    while (VRAI)
-    {
-        system("clear");
-        DisplayGrid(myGrid);
-        flagCell(myGrid);
-        printf("x? ==>"); 
-        x = checkInt();
-        printf("\ny? ==>");
-        y = checkInt();
-        Reveal(x,y, myGrid);
-        checkWin(myGrid);
-    }
 }
