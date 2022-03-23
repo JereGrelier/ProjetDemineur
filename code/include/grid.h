@@ -1,6 +1,7 @@
 #ifndef GRID_H
 #define GRID_H
 #include <stdlib.h>
+//#include <bool.h>
 #define VRAI 1
 #define FAUX 0
 typedef int BOOLEAN;
@@ -49,9 +50,8 @@ grid *CreateGrid(int h, int w);
  * 
  * @param mySommet The cell selected
  * @param myGrid The grid
- * @return How much mines are around the cell passed in parameter
  */
-void *getSurrond(sommet *mySommet, grid *myGrid);
+void getSurrond(sommet *mySommet, grid *myGrid);
 
 /**
  * @brief Display the grid
@@ -68,17 +68,10 @@ void DisplayGrid(grid *grid);
 void DeleteGrid(struct sommet **grid);
 
 /**
- * @brief Reveal a cell
+ * @brief Check whether an input is an integer or not
  * 
- * @param mySommet The cell to reveal
+ * @return The integer 
  */
-void * Reveal(int h, int w, grid* myGrid);
-
-/**
- * @brief Temp Fuction to test reveal
- * 
- * @param myGrid the grid
- */
-void handleLoose(grid *myGrid);
+int checkInt();
 
 #endif
