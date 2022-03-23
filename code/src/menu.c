@@ -1,24 +1,25 @@
 #include<stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> //atoi
 #include<menu.h>
 #include <ctype.h> 
+#include <string.h> // itoa
 #include <unistd.h> // to use sleep for debug
 
 //Global vars : 
-int game_mode, auto_game_mode=0, spec_mode=0, 
+char game_mode=0, auto_game_mode=0, spec_mode=0, 
     grid_size, mine_number;
 
-int check_int_input(char *N, int low_inter, int high_inter){
+void check_int_input(char *N, int low_inter, int high_inter){
     int i = 0;
     while (1) {
         i = atoi(N); //if choice is a str : i == 0
         printf("i=%d\n", i);
-        printf("%s\n", N);
+        printf("*N=%s\n", N); //%s va chercher le *N
         printf("Low : %d & High : %d\n", low_inter, high_inter);
         if(i>=low_inter && i<=high_inter){
-            fflush(stdout);
-            printf("\ncheck input result=%d",i);
-            return i;
+            printf("check input result=%d\n",i);
+            *N = i + '0';
+            return;
 	    } else {
             printf("Error, please select a digit between %d and %d\n", 
             low_inter, high_inter);
@@ -28,13 +29,19 @@ int check_int_input(char *N, int low_inter, int high_inter){
     }
 }
 
-int config_game(int *g_mode){
-    char tmp;
+int config_game(char *g_mode){
     printf("\n--------- CONFIGURATION ---------\n");
     printf("Game mode : 1. manual | 2. automatic\n:>");
-    scanf("%s", &tmp);
-    *g_mode = check_int_input(&tmp, 1, 2);
-    printf("%d", *g_mode);
+    scanf("%s", g_mode);
+    check_int_input(g_mode, 1, 2);
+    printf("Game mode selected = %s\n", *g_mode == '1' ? "manual" : "automatic");
+
+    /*if (*g_mode == '2'){
+        printf("Automatic game mode : 1. spectator | 2. statistics\n:>");
+        scanf("%s", g_mode);
+        check_int_input(g_mode, 1, 2);
+        printf("Game mode selected = %s\n", *g_mode == '1' ? "manual" : "automatic");
+    }*/
     _Exit(0);
 }
 
