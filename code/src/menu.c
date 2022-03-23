@@ -70,7 +70,7 @@ int config_game(char *gen_mode, char *auto_mode, char *nb_games){
         
     fflush(stdin);
 
-    printf("final length=%s\n", (&grid_length+2));
+    printf("final length=%s\n", (&grid_length+2)); // avec +2 ça fonctionne ?? pourquoi ??
     printf("final width=%s\n", &grid_width);
 
     /*int tmp1, tmp2;
