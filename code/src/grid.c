@@ -13,101 +13,67 @@
 #include <stdio.h>
 #include <time.h>
 #include "../include/grid.h"
+#include "../include/menu.h"
+
+//Global Variables
+int height;
+int width;
+sommet grid[height][width];
 
 
 //TODO Complete function
-void getSurrond(sommet *mySommet, grid *myGrid) {
+void getSurrond(sommet *mySommet) {
     if (mySommet->mined)
         return;
-    sommet *currentSommet = myGrid->firstSommet;
-    int a = mySommet->coor[0];
-    int b = mySommet->coor[1];
-    int c = currentSommet->coor[0];
-    int d = currentSommet->coor[1];
-    while (currentSommet->next != NULL)
-    {
-        if ((currentSommet->next == mySommet || mySommet->next==currentSommet) && c == a
-        || (c - 1 == a || c + 1 == a) && d == b
-        || (a==c-1 && b==d-1 || a==c+1 && b==d+1 || a==c-1 && b==d+1 || a==c+1 && b==d-1))
-        {
-            if(currentSommet->mined == VRAI)
-                mySommet->voisinage+=1;
-        }
-        currentSommet = currentSommet->next;
-        c = currentSommet->coor[0];
-        d = currentSommet->coor[1];
-    }
 }
 
-grid *CreateGrid(int h, int w) {
-
-    grid *myGrid = malloc(sizeof(*myGrid));
-    sommet *firstSommet = malloc(sizeof(*firstSommet));
-
-    if (myGrid == NULL || firstSommet == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
+void CreateGrid(int h, int w) {
+    sommet *MySommet;
     srand(time(NULL));
-    sommet *actualSommet = firstSommet;
-    firstSommet->next = actualSommet;
     for (int i = 1; i <= h; i++)
     {
         for (size_t j = 1; j <= w; j++)
         {
-            actualSommet->coor[0] = i;
-            actualSommet->coor[1] = j;
-            actualSommet->mined = rand() % 2;
-            actualSommet->flagged = FAUX;
-            actualSommet->discovered = FAUX;
-            actualSommet->next = malloc(sizeof(*actualSommet));
-            actualSommet = actualSommet->next;
+            MySommet->mined = rand() % 2;
+            MySommet->state = 0;
+            grid[i][j] = MySommet;
         }
     }
-    myGrid->firstSommet = firstSommet;
-    myGrid->h = h;
-    myGrid->w = w;
-    actualSommet = firstSommet;
-    while (actualSommet->next != NULL) {
-        getSurrond(actualSommet, myGrid);
-        actualSommet = actualSommet->next;
-    }
-    return myGrid;
+    return;
 }
 
-void DisplayGrid(grid *myGrid) {
-    if (myGrid == NULL)
+void DisplayGrid() {
+    if (grid == NULL)
     {
         exit(EXIT_FAILURE);
     }
     printf("    y -->\n");
-    sommet *actuel = myGrid->firstSommet;
-    for (int i = 0; i < myGrid->h; i++)
+    
+    for (int i = 0; i < height; i++)
     {
         printf("x=%d |", i+1);
-        for (int j = 0; j < myGrid->w; j++)
+        for (int j = 0; j < width; j++)
         {
-            if (actuel->flagged)
+            sommet mySommet = grid[i][j]; 
+            if (mySommet.state == 2)
             {
                 printf("\033[1;38;5;46m");
                 printf("F");
                 printf("\033[0m|");
             }
-            else if (!actuel->discovered)
+            else if (!mySommet.state)
             {
                 printf("?|");
             }
             
-            else if (actuel->mined) {
+            else if (mySommet.mined) {
                 printf("\033[1;31m");
                 printf("*");
                 printf("\033[0m|");
             }
             else {
-                printf("%d|", actuel->voisinage);
+                printf("%d|", mySommet.nbMineAround);
             }
-            if(actuel->next != NULL)
-                actuel = actuel->next;
         }
         printf("\n");
     }

@@ -1,12 +1,8 @@
 #ifndef GRID_H
 #define GRID_H
 #include <stdlib.h>
-//#include <bool.h>
-#define VRAI 1
-#define FAUX 0
-typedef int BOOLEAN;
+#include <stdbool.h>
 typedef struct sommet sommet;
-typedef struct grid grid;
 
 
 /**
@@ -15,26 +11,10 @@ typedef struct grid grid;
  */
 struct sommet
 {
-    int voisinage;
-    BOOLEAN mined;
-    BOOLEAN flagged;
-    BOOLEAN discovered;
-    int coor[2];
-    struct sommet *next;
+    int nbMineAround;
+    bool mined;
+    int state; // 1 if discovered, 2 if flagged, 0 else
 };
-
-/**
- * @brief The grid structure
- * @param w Width
- * @param h Height
- */
-struct grid
-{
-    int w;
-    int h;
-    struct sommet *firstSommet;
-};
-
 
 /**
  * @brief Create a Grid
@@ -43,7 +23,7 @@ struct grid
  * @param w Width
  * @return the grid 
  */
-grid *CreateGrid(int h, int w);
+void CreateGrid(int h, int w);
 
 /**
  * @brief Verify the surrondings of a cell
@@ -51,21 +31,14 @@ grid *CreateGrid(int h, int w);
  * @param mySommet The cell selected
  * @param myGrid The grid
  */
-void getSurrond(sommet *mySommet, grid *myGrid);
+void getSurrond(sommet *mySommet);
 
 /**
  * @brief Display the grid
  * 
- * @param grid the grid
- */
-void DisplayGrid(grid *grid);
-
-/**
- * @brief Delete the grid
  * 
- * @param grid the grid to delete
  */
-void DeleteGrid(struct sommet **grid);
+void DisplayGrid();
 
 /**
  * @brief Check whether an input is an integer or not

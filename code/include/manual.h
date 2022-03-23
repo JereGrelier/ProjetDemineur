@@ -8,38 +8,43 @@
 /**
  * @brief Reveal a cell
  * 
- * @param mySommet The cell to reveal
+ * @param h The line of the cell
+ * @param w The column of the cell
  */
-void * Reveal(int h, int w, grid* myGrid);
+void Reveal(int h, int w);
 
 /**
  * @brief Temp Fuction to loose ==> Move to end
  * 
- * @param myGrid the grid
  */
-void handleLoose(grid *myGrid);
+void handleLoose();
 
 
 /**
  * @brief Temp Fuction to Win ==> Move to end
  * 
- * @param myGrid the grid
  */
-void handleWin(grid *myGrid);
+void handleWin();
 
 /**
  * @brief Check if the grid has been fully discovered
  * 
- * @param myGrid The grid
  */
-void checkWin(grid *myGrid);
+void checkWin();
 
 /**
  * @brief The function to start flagging a cell
  * 
- * @param myGrid The grid
  */
-void flagCell(grid * myGrid);
+void flagCell();
+
+/**
+ * @brief The function which flag a cell
+ * 
+ * @param h The line of the cell
+ * @param w The column of the cell
+ */
+void handleFlag(int h, int w);
 
 /**
  * @brief The function to reveal a cell
@@ -48,6 +53,6 @@ void flagCell(grid * myGrid);
  * @param w The column of the cell
  * @param myGrid The grid
  */
-void * Reveal(int h, int w, grid* myGrid);
+void Reveal(int h, int w);
 
 #endif

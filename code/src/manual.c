@@ -12,25 +12,24 @@
 
 #include "../include/manual.h"
 
-void * Reveal(int h, int w, grid* myGrid) {
+//Global variables
+int height;
+int width;
+sommet grid[height][width];
+
+void Reveal(int h, int w) {
     printf("Revealing the cell at %d ; %d\n", h, w);
-    sommet * actual = myGrid->firstSommet;
-    while (actual->next != NULL) {
-        if (actual->coor[0] == h && actual->coor[1] == w)
-            break;
-        actual = actual->next;
-    } 
-    
-    if (actual->mined == VRAI)
+    sommet *mySommet = grid[h][w];        
+    if (mySommet->mined)
     {
-        handleLoose(myGrid);
+        handleLoose();
     }
-    actual->flagged = FAUX;
-    actual->discovered = VRAI;
-    DisplayGrid(myGrid);
+    mySommet->state = 1;
+    DisplayGrid();
 }
 
-void flagCell(grid * myGrid) {
+//TODO : MVC
+void flagCell() {
     printf("Do you want to flag a cell\n1. No\n2. Yes\n==> ");
     int a = checkInt();
     switch (a) {
@@ -42,67 +41,51 @@ void flagCell(grid * myGrid) {
             int x = checkInt();
             printf("\ny? ==>");
             int y = checkInt();
-            sommet * actual = myGrid->firstSommet;
-            while (actual->next != NULL) {
-                if (actual->coor[0] == x && actual->coor[1] == y)
-                    break;
-                actual = actual->next;
-            } 
-            actual->flagged = VRAI;
-            DisplayGrid(myGrid);
+            handleFlag(x,y);
+            DisplayGrid();
             break;
         }
         default:
             break;
     }
-    flagCell(myGrid);
+    flagCell();
 }
 
-void handleFlag(){
-
-    
+void handleFlag(int h, int w){
+    sommet *MySommet = grid[h][w];
+    if(MySommet->state != 2)
+        MySommet->state = 2;
 }
 
-void handleWin(grid *myGrid) {
-    sommet *currentSommet = myGrid->firstSommet; 
-    while (currentSommet->next != NULL) {
-        if (currentSommet->discovered == FAUX)
-            currentSommet->flagged =VRAI;
-        currentSommet = currentSommet->next;
-    }
+void PrintWin() {
     system("clear");
-    DisplayGrid(myGrid);
+    DisplayGrid();
     printf("You Win\n");
     system("paplay ../assets/GG.wav &");
     _Exit(0);
 }
 
-void handleLoose(grid *myGrid) {
+void handleLoose() {
     printf("You lost\n");
-    sommet * actual = myGrid->firstSommet;
-    while (actual->next != NULL) {
-        actual->discovered = VRAI;
-        actual->flagged = FAUX;
-        actual = actual->next;
-    }
+    RevealAll();
     printf("Here is the full grid\n");
-    DisplayGrid(myGrid);
+    DisplayGrid();
     _Exit(0);
 }
 
-void checkWin(grid *myGrid) {
-    sommet *currentSommet = myGrid->firstSommet;
-    while (currentSommet->next != NULL)
+void RevealAll(){
+    for (int i = 0; i < height; i++)
     {
-        if(currentSommet->discovered == FAUX && currentSommet->mined == VRAI){
-            currentSommet = currentSommet->next;
-            continue;
+        for (int j = 0; j < width; j++)
+        {
+            sommet *MySommet = grid[i][j];
+            MySommet->state = 1;
         }
-        if(currentSommet->discovered == FAUX && currentSommet->mined == FAUX){
-            return;
-        }
-        currentSommet = currentSommet->next;
+        
     }
-    handleWin(myGrid);
-    
+    return;
+}
+
+void checkWin() {
+    PrintWin();
 }

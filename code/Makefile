@@ -1,5 +1,5 @@
 LDFLAGS = -Lmine 
-CFLAGS = -I./include
+CFLAGS = -I./include -Wall
 
 .PHONY: clean doc
 
@@ -8,10 +8,10 @@ all: game
 
 
 game: bin/main.o bin/grid.o bin/manual.o
-	gcc -o $@ $^  $(LDFLAGS) -ggdb -O0
+	c99 -o $@ $^  $(LDFLAGS) -ggdb -O0
 
 bin/%.o : src/%.c include/grid.h include/manual.h
-	gcc $(CFLAGS) -c $< -o $@ -fpic
+	c99 $(CFLAGS) -c $< -o $@ -fpic
 
 clean:
 	rm -rf grid && cd bin && rm -rf *;

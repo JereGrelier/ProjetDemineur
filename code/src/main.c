@@ -1,27 +1,30 @@
 #include "../include/manual.h"
 
-void main() {
-    int h, w = 0;
-    char tmp;
+//Global Variables
+int height;
+int width;
+sommet grid[height][width];
+
+int main() {
     printf("SIZE OF THE GRID : \n");
     printf("x? ==>"); 
-    h = checkInt();
+    height = checkInt();
     printf("y? ==>");
-    w = checkInt();
-    grid *myGrid = CreateGrid(h,w);
-    DisplayGrid(myGrid);
+    width = checkInt();
+    CreateGrid(height,width);
+    DisplayGrid();
     int x, y;
-    sommet *currentSommet = myGrid->firstSommet;
-    while (VRAI)
+    while (true)
     {
         system("clear");
-        DisplayGrid(myGrid);
-        flagCell(myGrid);
+        DisplayGrid();
+        flagCell();
         printf("x? ==>"); 
         x = checkInt();
         printf("\ny? ==>");
         y = checkInt();
-        Reveal(x,y, myGrid);
-        checkWin(myGrid);
+        Reveal(x,y);
+        checkWin();
     }
+    return 0;
 }
