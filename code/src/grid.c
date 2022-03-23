@@ -71,7 +71,7 @@ sommet createSommet(int minesToPlace) {
 
 void placeMines(int nbMines) {
     srand(time(NULL));
-    while (nbMines)
+    while (nbMines != 0)
     {
         for (int i = 1; i <= grid.height; i++)
         {
