@@ -4,58 +4,69 @@
 #include <ctype.h> 
 #include <unistd.h> // to use sleep for debug
 
-//https://stackoverflow.com/questions/49460307/using-fgets-and-strtol-to-get-a-single-integer
-//https://openclassrooms.com/forum/sujet/equivalent-de-fgets-pour-les-int
-int config_game(){
-    printf("CONFIG GAME OK\n");
-    return 0;
+//Global vars : 
+int game_mode, auto_game_mode=0, spec_mode=0, 
+    grid_size, mine_number;
+
+int check_int_input(char *N, int low_inter, int high_inter){
+    int i = 0;
+    while (1) {
+        i = atoi(N); //if choice is a str : i == 0
+        printf("i=%d\n", i);
+        printf("%s\n", N);
+        printf("Low : %d & High : %d\n", low_inter, high_inter);
+        if(i>=low_inter && i<=high_inter){
+            fflush(stdout);
+            printf("\ncheck input result=%d",i);
+            return i;
+	    } else {
+            printf("Error, please select a digit between %d and %d\n", 
+            low_inter, high_inter);
+            scanf("%s", N);
+            i = atoi(N);
+        }
+    }
 }
 
-void printWelcome() {
+int config_game(int *g_mode){
+    char tmp;
+    printf("\n--------- CONFIGURATION ---------\n");
+    printf("Game mode : 1. manual | 2. automatic\n:>");
+    scanf("%s", &tmp);
+    *g_mode = check_int_input(&tmp, 1, 2);
+    printf("%d", *g_mode);
+    _Exit(0);
+}
+
+void welcome(){
     printf("======================\n");
     printf("****** 1. Play  ******\n");
-    printf("****** 0. Exit  ******\n");
+    printf("****** 2. Exit  ******\n");
     printf("======================\n");
-}
-
-void welcome(int hasError){
-    //printf("%d\n",hasError);
-    if(hasError < 2)
-        printWelcome();
+    char choice;
+    int i;
+    // Read the next character in the input buffer
     printf("\nPlease select a choice :>");
-    int choice = 5;
-    int scanf_return = scanf("%d", &choice);
-    //atoi(choice); //test
-    //printf("choice=%d\n", choice); //for debug var
-    //printf("scanf_returned:%d\n", scanf_return); //for debug var
-    //sleep(1);
+    scanf("%s", &choice);
 
-    if (scanf_return == 1){
-        if (choice == 1){
-            config_game();
-        } else if (choice == 0) {
-            printf("Bye!\n");
-        } else {
-            if (hasError < 1)
-                printf("\nPlease select a valid integer between 0 and 1!\n");
-            welcome(hasError+1);
-        }
-    } else { //if str
-        if (hasError < 1){
-            printf("\nPlease enter a valid integer between 0 and 1!\n");
-            printWelcome();
-        }
-        do {
-            choice = getchar();
-        }
-        while (!isdigit(choice) || choice=='\0');
-        ungetc(choice,stdin);
-        welcome(hasError+2);
+    i = atoi(&choice); //if choice is a str : i == 0
+        
+    if (i == 1){
+        config_game(&game_mode);
+        
+    } else if (i == 2){
+        printf("Bye!\n");
+        _Exit(0); //quit properly
+    } else {
+        printf("Error, please select either 1 or 2\n");
+        sleep(3); //read error msg
+        system("clear"); //system(): exec bash cmds
+        welcome();
     }
 }
 
 int main(int argc, char const *argv[]){
-    welcome(0);
+    welcome();
     return 0;
 }
 
