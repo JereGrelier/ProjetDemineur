@@ -62,7 +62,7 @@ void PrintWin() {
     RevealAll();
     DisplayGrid();
     printf("You Win\n");
-    system("paplay ../assets/GG.wav &");
+    system("paplay ./assets/GG.wav &");
     _Exit(0);
 }
 

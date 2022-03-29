@@ -18,27 +18,28 @@
 //Global Variables
 
 extern Grid *grid;
+int mineToPlace;
 
 
 //TODO Complete function
-void getNbSurrondingMines(int h, int w) {
+void getNbSurrondingMines() {
    
-    for (int i = 0; i < h; i++)
+    for (int i = 0; i < grid->height; i++)
     {
-        for (int j = 0; j < w; j++)
+        for (int j = 0; j < grid->width; j++)
         {
             if (grid->sommet[i][j].mined)
                 break;
             else
             {
-                grid->sommet[i][j].nbMineAround ++;
+                if( grid->sommet[i-1][j+1].mined || grid->sommet[i-1][j-1].mined || grid->sommet[i+1][j+1].mined
+                    || grid->sommet[i+1][j-1].mined || grid->sommet[i][j+1].mined || grid->sommet[i][j-1].mined
+                    || grid->sommet[i+1][j].mined || grid->sommet[i-1][j].mined){
+                        grid->sommet[i][j].nbMineAround++;
+                    }
             }
-            
         }
-        
-    }
-    
-    
+    }  
 }
 
 void CreateGrid(int h, int w, int nbMines) {
@@ -48,27 +49,30 @@ void CreateGrid(int h, int w, int nbMines) {
     grid->nbMines = nbMines;
     grid->sommet = (sommet **)malloc(grid->height * sizeof(sommet));
     printf(" H : %d\n W : %d\n NbMines : %d\n", grid->height, grid->width, grid->nbMines);
-    int minesToPlace = nbMines;
+    mineToPlace = nbMines;
     for (int i = 0; i < grid->height; i++)
     {
         grid->sommet[i] = (sommet *)malloc(grid->width * sizeof(sommet));
         for (int j = 0; j < grid->width; j++)
         {
-            grid->sommet[i][j] = createSommet(&minesToPlace);             
+            grid->sommet[i][j] = createSommet(mineToPlace);      
         }
     }
     //placeMines(nbMines);
-    getNbSurrondingMines(h,w);
+    getNbSurrondingMines();
     return;
 }
 
-sommet createSommet(int *minesToPlace) {
+sommet createSommet() {
     bool isMined = false;
-    if (minesToPlace) {
-        srand(time(NULL));
-        printf("mine placed\n");
-        isMined = rand() % 2;
-        minesToPlace--;
+    srand(time(NULL));
+    if (mineToPlace) {
+        isMined = rand() % 2 ? true : false;
+        if (isMined == true) {
+            mineToPlace--;
+            printf("mine placed successfully\n");
+        }
+           
     }
     sommet s = {
             .mined = isMined,

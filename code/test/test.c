@@ -21,17 +21,17 @@ int nb_games, grid_length, grid_width, mine_number;
 
 
 int checkInt() {
-    char *tmp = malloc(sizeof(char));
+    char tmp;
     int res = 0;
     
     while(res == 0) {
-        scanf("%s", tmp);
-        // if(strstr(tmp, "exit")){
-        //  printf("Bye!\n");
-        //     _Exit(0);
-        // }
+        scanf("%s", &tmp);
+        if(strstr(&tmp, "exit")){
+          printf("Bye!\n");
+            _Exit(0);
+        }
          
-        res = atoi(tmp);
+        res = atoi(&tmp);
         if(res == 0)
             printf("Not a valid number, please retry\n==>");
     }
@@ -46,7 +46,7 @@ int main(int argc, char const *argv[]){
    printf("Please choose the number of games on which stats will be made\n:>");
    nb_games = checkInt();
 
-   printf("nbgames=%d\n");
+   printf("nbgames=%d\n", nb_games);
 
   /*
    int err_code;

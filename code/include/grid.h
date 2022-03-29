@@ -36,10 +36,10 @@ void CreateGrid(int h, int w, int nbMines);
 /**
  * @brief Create a Sommet object
  * 
- * @param minesToPlace To check if there are still mines to place
+ *
  * @return sommet 
  */
-sommet createSommet(int *minesToPlace);
+sommet createSommet();
 
 /**
  * @brief Place randomly nbMines mines on the grid
