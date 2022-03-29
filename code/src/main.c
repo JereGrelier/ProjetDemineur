@@ -13,11 +13,10 @@ int main() {
     printf("How many mines? ==>");
     nbMines = checkInt();
     CreateGrid(height, width, nbMines);
-    DisplayGrid();
     int x, y;
     while (true)
     {
-        //system("clear");
+        system("clear");
         DisplayGrid();
         flagCell();
         printf("x? ==>"); 

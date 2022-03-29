@@ -32,11 +32,11 @@ void getNbSurrondingMines() {
                 break;
             else
             {
-                if( grid->sommet[i-1][j+1].mined || grid->sommet[i-1][j-1].mined || grid->sommet[i+1][j+1].mined
+                /* if( grid->sommet[i-1][j+1].mined || grid->sommet[i-1][j-1].mined || grid->sommet[i+1][j+1].mined
                     || grid->sommet[i+1][j-1].mined || grid->sommet[i][j+1].mined || grid->sommet[i][j-1].mined
                     || grid->sommet[i+1][j].mined || grid->sommet[i-1][j].mined){
                         grid->sommet[i][j].nbMineAround++;
-                    }
+                    } */
             }
         }
     }  
