@@ -13,15 +13,17 @@
 #include "../include/manual.h"
 
 //Global variables
-Grid grid;
+Grid *grid;
 
 void Reveal(int h, int w) {
-    printf("Revealing the cell at %d ; %d\n", h, w);      
-    if (grid.sommet[h][w].mined)
+    printf("Revealing the cell at %d ; %d\n", h, w);
+    h--;
+    w--;
+    if (grid->sommet[h][w].mined)
     {
         handleLoose();
     }
-    grid.sommet[h][w].state = 1;
+    grid->sommet[h][w].state = 1;
     DisplayGrid();
 }
 
@@ -45,16 +47,19 @@ void flagCell() {
         default:
             break;
     }
-    flagCell();
+    flagCell(grid);
 }
 
 void handleFlag(int h, int w){
-    if(grid.sommet[h][w].state != 2)
-        grid.sommet[h][w].state = 2;
+    h--;
+    w--;
+    if(grid->sommet[h][w].state != 2)
+        grid->sommet[h][w].state = 2;
 }
 
 void PrintWin() {
     system("clear");
+    RevealAll();
     DisplayGrid();
     printf("You Win\n");
     system("paplay ../assets/GG.wav &");
@@ -70,11 +75,11 @@ void handleLoose() {
 }
 
 void RevealAll(){
-    for (int i = 0; i < grid.height; i++)
+    for (int i = 0; i < grid->height; i++)
     {
-        for (int j = 0; j < grid.width; j++)
+        for (int j = 0; j < grid->width; j++)
         {
-            grid.sommet[i][j].state = 1;
+            grid->sommet[i][j].state = 1;
         }
         
     }

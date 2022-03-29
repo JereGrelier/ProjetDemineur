@@ -17,7 +17,7 @@ int main() {
     int x, y;
     while (true)
     {
-        system("clear");
+        //system("clear");
         DisplayGrid();
         flagCell();
         printf("x? ==>"); 
