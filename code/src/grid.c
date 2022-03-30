@@ -19,7 +19,6 @@
 
 extern Grid *grid;
 int mineToPlace;
-time_t t;
 
 bool isInGrid(int h, int w)
 {
@@ -56,7 +55,7 @@ void getNbSurrondingMines(int h, int w)
 }
 
 void CreateGrid(int h, int w, int nbMines) {
-    srand((unsigned) time(&t));
+    srand((time_t)NULL);
     grid = malloc(sizeof(Grid));
     grid->height = h;
     grid->width = w;
@@ -72,27 +71,34 @@ void CreateGrid(int h, int w, int nbMines) {
             grid->sommet[i][j] = createSommet(mineToPlace);      
         }
     }
+    placeMines(nbMines);
     for (int i = 0; i < grid->height; i++)
     {
         for (int j = 0; j < grid->width; j++)
         {
-               getNbSurrondingMines(i, j); 
+            getNbSurrondingMines(i, j); 
         }
     }
     return;
 }
 
-sommet createSommet() {
-    bool isMined = false;
-    if (mineToPlace) {
-        isMined = rand() % 2 ? true : false;
-        if (isMined == true) {
-            mineToPlace--;
-        }
-           
+void placeMines(int nbMines) {
+    while (nbMines)
+    {
+        int h = rand() % grid->height;
+        int w = rand() % grid->width;
+        if (!grid->sommet[h][w].mined)
+        {
+            printf("Mines to place : %d\n", nbMines);
+            grid->sommet[h][w].mined = true;
+            nbMines--;
+        }  
     }
+}
+
+sommet createSommet() {
     sommet s = {
-            .mined = isMined,
+            .mined = false,
             .state = 0,
             };
     return s;

@@ -55,5 +55,13 @@ void handleFlag(int h, int w);
  */
 void Reveal(int h, int w);
 
+/**
+ * @brief 
+ * 
+ * @param h 
+ * @param w 
+ */
+void AutoReveal(int h, int w);
+
 void RevealAll();
 #endif

@@ -22,7 +22,6 @@ struct grid {
     int width;
     int nbMines;
 };
-
 /**
  * @brief Create a Grid
  * 
@@ -40,6 +39,16 @@ void CreateGrid(int h, int w, int nbMines);
  * @return sommet 
  */
 sommet createSommet();
+
+/**
+ * @brief 
+ * 
+ * @param h 
+ * @param w 
+ * @return true 
+ * @return false 
+ */
+bool isInGrid(int h, int w);
 
 /**
  * @brief Place randomly nbMines mines on the grid

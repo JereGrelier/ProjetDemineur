@@ -23,7 +23,10 @@ int main() {
         x = checkInt();
         printf("\ny? ==>");
         y = checkInt();
-        Reveal(x,y);
+        if(isInGrid(x,y))
+            Reveal(x,y);
+        else
+            continue;
         checkWin();
     }
     return 0;
