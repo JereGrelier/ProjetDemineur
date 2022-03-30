@@ -109,6 +109,7 @@ void handleLoose() {
     printf("You lost\n");
     RevealAll();
     printf("Here is the full grid\n");
+    system("paplay ./assets/loose.wav &");
     DisplayGrid();
     _Exit(0);
 }
@@ -148,7 +149,6 @@ void checkWin() {
             }
             
         }
-        
     }
     PrintWin();
 }
