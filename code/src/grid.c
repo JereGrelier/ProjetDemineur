@@ -19,30 +19,44 @@
 
 extern Grid *grid;
 int mineToPlace;
+time_t t;
 
-
-//TODO Complete function
-void getNbSurrondingMines() {
-   
-    for (int i = 0; i < grid->height; i++)
+bool isInGrid(int h, int w)
+{
+    if (
+        h < 0 ||
+        h >= grid->height ||
+        w < 0 ||
+        w >= grid->width)
     {
-        for (int j = 0; j < grid->width; j++)
+        return false;
+    }
+    return true;
+}
+
+void getNbSurrondingMines(int h, int w)
+{
+    int nb_mines = 0;
+    for (int i = -1; i <= 1; i++)
+    {
+        for (int j = -1; j <= 1; j++)
         {
-            if (grid->sommet[i][j].mined)
-                break;
-            else
+            if (i == 0 && j == 0)
+                continue; // Skip the cell itself
+            if (isInGrid(h + i, w + j))
             {
-                /* if( grid->sommet[i-1][j+1].mined || grid->sommet[i-1][j-1].mined || grid->sommet[i+1][j+1].mined
-                    || grid->sommet[i+1][j-1].mined || grid->sommet[i][j+1].mined || grid->sommet[i][j-1].mined
-                    || grid->sommet[i+1][j].mined || grid->sommet[i-1][j].mined){
-                        grid->sommet[i][j].nbMineAround++;
-                    } */
+                if (grid->sommet[h + i][w + j].mined)
+                {
+                    nb_mines++;
+                }
             }
         }
-    }  
+    }
+    grid->sommet[h][w].nbMineAround = nb_mines;
 }
 
 void CreateGrid(int h, int w, int nbMines) {
+    srand((unsigned) time(&t));
     grid = malloc(sizeof(Grid));
     grid->height = h;
     grid->width = w;
@@ -58,19 +72,22 @@ void CreateGrid(int h, int w, int nbMines) {
             grid->sommet[i][j] = createSommet(mineToPlace);      
         }
     }
-    //placeMines(nbMines);
-    getNbSurrondingMines();
+    for (int i = 0; i < grid->height; i++)
+    {
+        for (int j = 0; j < grid->width; j++)
+        {
+               getNbSurrondingMines(i, j); 
+        }
+    }
     return;
 }
 
 sommet createSommet() {
     bool isMined = false;
-    srand(time(NULL));
     if (mineToPlace) {
         isMined = rand() % 2 ? true : false;
         if (isMined == true) {
             mineToPlace--;
-            printf("mine placed successfully\n");
         }
            
     }
@@ -80,29 +97,6 @@ sommet createSommet() {
             };
     return s;
 }
-
-/* void placeMines(int nbMines) {
-    srand(time(NULL));
-    while (nbMines != 0)
-    {
-        printf("aaaaaaaaaaaaaaaaaaaaaa\n");
-        for (int i = 0; i < grid->height; i++)
-        {
-            printf("bbbbbbbbbbbbbbbbbbbbbbbbbbb\n");
-            for (int j = 0; j < grid->width; j++)
-            {
-                printf("c\n");
-                printf("Mined ? : %d\n", grid->sommet[i][j].mined);
-                if (grid->sommet[i][j].mined == false)
-                {
-                    printf("not mined\n");
-                    grid->sommet[i][j].mined = true;
-                    nbMines--;
-                }
-            }
-        }
-    }
-} */
 
 void DisplayGrid() {
     printf("    y -->\n");
@@ -137,7 +131,7 @@ void DisplayGrid() {
 }
 
 
-
+//TODO : MOVE THIS !!!
 int checkInt() {
     char tmp;
     int res = 0;
