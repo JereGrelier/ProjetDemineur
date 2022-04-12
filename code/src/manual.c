@@ -26,7 +26,7 @@ void autoRevealWhenNoMinesAround(int h, int w) {
             if (isInGrid(h + i, w + j))
             {
                 sommet *s = &(grid->sommet[h + i][w + j]);
-                if (s->state != 1 && s->nbMineAround == 0)
+                if (s->state != 1 && !s->mined)
                 {
                     AutoReveal(h + i, w + j);
                 }
@@ -114,16 +114,18 @@ void HideAll(){
 }
 
 void checkWin() {
+    int flaggedMines = grid->nbMines;
     for (int i = 0; i < grid->height; i++)
     {
         for (int j = 0; j < grid->width; j++)
         {
-            if ((!grid->sommet[i][j].mined && !grid->sommet[i][j].state))
+            if (!flaggedMines)
             {
-                return;
+                PrintWin();
             }
-            
+            if (grid->sommet[i][j].mined && grid->sommet[i][j].state==2)
+                flaggedMines--;
         }
     }
-    PrintWin();
+    
 }
