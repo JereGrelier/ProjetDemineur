@@ -33,10 +33,10 @@ void handleWin();
 void checkWin();
 
 /**
- * @brief The function to start flagging a cell
+ * @brief The function to check if player wants to flag
  * 
  */
-void flagCell();
+bool flagCell();
 
 /**
  * @brief The function which flag a cell

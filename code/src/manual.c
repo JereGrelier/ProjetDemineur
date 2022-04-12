@@ -11,13 +11,13 @@
  */
 
 #include "../include/manual.h"
+#include "../include/end.h"
 
 
 //Global variables
 Grid *grid;
 
 void autoRevealWhenNoMinesAround(int h, int w) {
-    printf("x=%d & y=%d\n", h, w);
     for (int i = -1; i <= 1; i++)
     {
         for (int j = -1; j <= 1; j++)
@@ -27,7 +27,7 @@ void autoRevealWhenNoMinesAround(int h, int w) {
             if (isInGrid(h + i, w + j))
             {
                 sommet *s = &(grid->sommet[h + i][w + j]);
-                if (s->state != 1 && s->nbMineAround == 0)
+                if (s->state != 1 && !s->mined)
                 {
                     AutoReveal(h + i, w + j);
                 }
@@ -45,9 +45,7 @@ void AutoReveal(int h, int w) {
 }
 
 void Reveal(int h, int w) {
-    printf("Revealing the cell at %d ; %d\n", h, w);
-    h--;
-    w--;
+
     if (grid->sommet[h][w].mined)
     {
         handleLoose();
@@ -61,36 +59,15 @@ void Reveal(int h, int w) {
 }
 
 //TODO : MVC
-void flagCell() {
+bool flagCell() {
     printf("Do you want to flag a cell\n1. No\n2. Yes\n==> ");
     int a = checkInt();
-    switch (a) {
-        case 1:
-            return;
-        case 2: {
-            printf("Flagging...\n");
-            printf("x? ==>"); 
-            int x = checkInt();
-            printf("\ny? ==>");
-            int y = checkInt();
-            if(isInGrid(x,y))
-                handleFlag(x,y);
-            else {
-                printf("Erreur dans la saisie de la case\n");
-                break;
-            }
-            DisplayGrid();
-            break;
-        }
-        default:
-            break;
-    }
-    flagCell(grid);
+    if(a == 2)
+        return true;
+    return false;
 }
 
 void handleFlag(int h, int w){
-    h--;
-    w--;
     if(grid->sommet[h][w].state != 2)
         grid->sommet[h][w].state = 2;
 }
@@ -101,7 +78,7 @@ void PrintWin() {
     DisplayGrid();
     printf("You Win\n");
     system("paplay ./assets/GG.wav &");
-    _Exit(0);
+    handleEndGame();
 }
 
 void handleLoose() {
@@ -110,7 +87,7 @@ void handleLoose() {
     printf("Here is the full grid\n");
     system("paplay ./assets/loose.wav &");
     DisplayGrid();
-    _Exit(0);
+    handleEndGame();
 }
 
 void RevealAll(){
@@ -138,16 +115,18 @@ void HideAll(){
 }
 
 void checkWin() {
+    int flaggedMines = grid->nbMines;
     for (int i = 0; i < grid->height; i++)
     {
         for (int j = 0; j < grid->width; j++)
         {
-            if ((!grid->sommet[i][j].mined && !grid->sommet[i][j].state))
+            if (!flaggedMines)
             {
-                return;
+                PrintWin();
             }
-            
+            if (grid->sommet[i][j].mined && grid->sommet[i][j].state==2)
+                flaggedMines--;
         }
     }
-    PrintWin();
+    
 }
