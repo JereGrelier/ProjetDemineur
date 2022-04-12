@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-//extern char game_mode, auto_game_mode, nb_games, grid_length, grid_width, mine_number;
+extern unsigned int game_mode, auto_game_mode, nb_games, grid_length, grid_width, mine_number;
 
 /**
  * @brief Choose to play a game or quit the prog

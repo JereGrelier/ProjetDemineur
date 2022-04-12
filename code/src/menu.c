@@ -6,7 +6,7 @@
 #include <string.h> //strlen
 
 //Global vars : AJOUTER extern UNE FOIS LE PROG FONCTIONNEL! 
-char game_mode, auto_game_mode, nb_games, 
+unsigned int game_mode, auto_game_mode, nb_games, 
     grid_length, grid_width, mine_number;
 
 void viderBuffer(){
@@ -102,7 +102,6 @@ int config_game(){
             printf("Number of Mines ? :>");
             mine_number = checkInt(1,grid_length*grid_width/2);
             printf("Mine Number=%d\n", mine_number);
-
 
             printf("-----------------\n\n");
             printf("RECAP \n");
