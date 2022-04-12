@@ -1,9 +1,7 @@
 #include "../include/manual.h"
 #include "../include/menu.h"
 
-int height;
-int width;
-int nbMines;
+unsigned int game_mode, auto_game_mode, nb_games, grid_length, grid_width, mine_number;
 
 int main() {
     system("clear");
@@ -14,7 +12,8 @@ int main() {
     width = checkInt();
     printf("How many mines? ==>");
     nbMines = checkInt(); */
-    CreateGrid(height, width, nbMines);
+    welcome();
+    CreateGrid(grid_length, grid_width, mine_number);
     int x, y;
     while (true)
     {

@@ -61,7 +61,7 @@ void check_int_input(char *N, int low_inter, int high_inter){
         //printf("Low : %d & High : %d\n", low_inter, high_inter);
         if(ii>=low_inter && ii<=high_inter){
             //printf("check input result=%d\n",ii);
-            //*N = i + '0';
+            // *N = i + '0';
             //printf("*N = %s \n", N);
             return;
 	    } else {
@@ -139,7 +139,7 @@ int config_game(){
     _Exit(0);
     }
     */
-     
+    _Exit(0);
 }
 
 void welcome(){
@@ -167,9 +167,3 @@ void welcome(){
         welcome();
     } */
 }
-
-int main(int argc, char const *argv[]){
-    welcome();
-    return 0;
-}
-
