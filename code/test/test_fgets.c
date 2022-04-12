@@ -26,12 +26,12 @@ void viderBuffer(){
     }
 }
 
-int checkInt() {
+int checkInt(int low_inter, int high_inter) {
     char tmp[100];
     unsigned int res = 0;
     
     while(res == 0) {
-        if (fgets(tmp, 100, stdin) != NULL){   
+        if (fgets(tmp, 100, stdin) != NULL){
             printf("len=%d\n", strlen(tmp)); // qd on regarde la taille on est toujours a + 1 car fgets ajoute  \n\0 --> le \n est compté
             if(strlen(tmp) > 3) {
                 printf("Not a valid number, please retry\n==>");
@@ -44,14 +44,16 @@ int checkInt() {
                 _Exit(0);
             }
             else {
-                printf("OK\n");
-                printf("tmp = %s \n", tmp);
                 res = atoi(tmp);
-                printf("res=%d\n", res);
-                if(res == 0){
-                    printf("test\n");
-                    printf("Not a valid number, please retry\n==>");
-                    viderBuffer();
+                if (res >=low_inter && res<=high_inter){
+                    printf("OK\n");
+                    printf("tmp = %s \n", tmp);
+                    printf("res=%d\n", res);
+                } else if (res == 0){
+                    printf("Not a valid number (can't be = 0), please retry\n==>");
+                } else {
+                    printf("Error, please select a number between %d and %d\n", low_inter, high_inter);
+                    res = 0;
                 }
             }
         }
@@ -65,7 +67,7 @@ int main(int argc, char const *argv[]){
    printf("%d\n", str);
    */
    printf("Please choose the number of games on which stats will be made\n:>");
-   nb_games = checkInt();
+   nb_games = checkInt(1, 20);
 
    printf("\nnbgames=%d\n", nb_games);
 
