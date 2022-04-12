@@ -95,24 +95,27 @@ int config_game(){
             grid_length = checkInt(1,30); // Length max = 30 
             printf("Length=%d\n", grid_length);
 
-            printf("Number of Mines ? :>");
-            scanf("%s", &mine_number);
-            check_int_input(&mine_number, 1, 30); // Length max = 30
-            //printf("MineNB=%s\n", &mine_number);
-
             printf("\nWidth ? :>");
-            scanf("%s", &grid_width);
-            check_int_input(&grid_width, 1, 24); // Width max = 24
-            printf("Width=%s\n", &grid_width);
-            
+            grid_width = checkInt(1,24); // Width max = 24
+            printf("Width=%d\n", grid_width);
 
-            printf("NB Games = %s\n", nb_games);
-            printf("Length=%s\n", grid_length);
-            printf("Mine NB=%s\n", mine_number);
+            printf("Number of Mines ? :>");
+            mine_number = checkInt(1,grid_length*grid_width/2);
+            printf("Mine Number=%d\n", mine_number);
+
+
+            printf("-----------------\n\n");
+            printf("RECAP \n");
+            printf("Number of Games = %d\n", nb_games);
+            printf("Grid Length=%d\n", grid_length);
+            printf("Grid Width=%d\n", grid_width);
+
+            printf("Number of Mines =%d\n", mine_number);
 
             _Exit(0);
         }
     }
+    /*
     printf("-----------------\n\n");
     
     
@@ -136,6 +139,7 @@ int config_game(){
 
     _Exit(0);
     }
+    */
      
 }
 
