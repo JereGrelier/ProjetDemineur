@@ -34,7 +34,6 @@ bool isInGrid(int h, int w)
         w >= grid->width)
     {
         printNInGrid(h,w);
-        sleep(3);
         return false;
     }
     return true;
