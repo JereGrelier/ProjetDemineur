@@ -27,7 +27,6 @@ void autoRevealWhenNoMinesAround(int h, int w) {
             if (isInGrid(h + i, w + j))
             {
                 sommet *s = &(grid->sommet[h + i][w + j]);
-                //printf("x=%d & y=%d\n", h+i, w+j);
                 if (s->state != 1 && s->nbMineAround == 0)
                 {
                     AutoReveal(h + i, w + j);
