@@ -80,13 +80,6 @@ void getSurrond(sommet *mySommet);
  */
 void DisplayGrid();
 
-/**
- * @brief Check whether an input is an integer or not
- * 
- * @return The integer 
- */
-int checkInt();
-
 extern Grid *grid;
 
 #endif

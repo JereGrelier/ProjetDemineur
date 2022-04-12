@@ -61,7 +61,7 @@ void Reveal(int h, int w) {
 //TODO : MVC
 bool flagCell() {
     printf("Do you want to flag a cell\n1. No\n2. Yes\n==> ");
-    int a = checkInt();
+    int a = checkInt(1,2);
     if(a == 2)
         return true;
     return false;

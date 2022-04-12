@@ -1,4 +1,5 @@
 #include "../include/manual.h"
+#include "../include/menu.h"
 
 int height;
 int width;
@@ -6,13 +7,13 @@ int nbMines;
 
 int main() {
     system("clear");
-    printf("SIZE OF THE GRID : \n");
+    /* printf("SIZE OF THE GRID : \n");
     printf("x? ==>"); 
     height = checkInt();
     printf("y? ==>");
     width = checkInt();
     printf("How many mines? ==>");
-    nbMines = checkInt();
+    nbMines = checkInt(); */
     CreateGrid(height, width, nbMines);
     int x, y;
     while (true)
@@ -21,9 +22,9 @@ int main() {
         DisplayGrid();
         bool doFlag = flagCell();
         printf("x? ==>"); 
-        x = checkInt();
+        x = checkInt(1, grid->height);
         printf("\ny? ==>");
-        y = checkInt();
+        y = checkInt(1, grid->width);
         if(doFlag){
             if(isInGrid(x-1,y-1))
                 handleFlag(x-1,y-1);

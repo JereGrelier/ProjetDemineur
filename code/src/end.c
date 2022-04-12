@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../include/end.h"
+#include "../include/menu.h"
 
 void handleReplay() {
     printf("SoonTm\n");
@@ -13,7 +14,7 @@ void handleEndGame() {
     printf("1. Replay with same parameters\n");
     printf("2. Go back to main menu\n");
     printf("3. Exit the game\n ==>");
-    int choice = checkInt();
+    int choice = checkInt(1,3);
     switch (choice)
     {
     case 1:

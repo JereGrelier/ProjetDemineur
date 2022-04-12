@@ -138,18 +138,3 @@ void DisplayGrid() {
         printf("\n");
     }
 }
-
-
-//TODO : MOVE THIS !!!
-int checkInt() {
-    char tmp;
-    int res = 0;
-    
-    while(res == 0) {
-        scanf("%s", &tmp);
-        res = atoi(&tmp);
-        if(res == 0)
-            printf("Not a valid number, please retry\n==>");
-    }
-    return res;
-}
