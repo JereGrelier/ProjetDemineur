@@ -2,12 +2,17 @@
 #include <stdio.h>
 #include "../include/end.h"
 
+void handleReplay() {
+    printf("SoonTm\n");
+    _Exit(0);
+}
 
 void handleEndGame() {
+    printf("\n\n");
     printf("What do you want to do?\n");
     printf("1. Replay with same parameters\n");
     printf("2. Go back to main menu\n");
-    printf("3. Exit the game");
+    printf("3. Exit the game\n ==>");
     int choice = checkInt();
     switch (choice)
     {
@@ -15,6 +20,10 @@ void handleEndGame() {
         handleReplay();
         break;
     case 2:
+        break;
+    case 3:
+        system("clear");
+        _Exit(0);
     default:
         break;
     }

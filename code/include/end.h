@@ -8,4 +8,6 @@
 
 void handleEndGame();
 
+void handleReplay();
+
 #endif

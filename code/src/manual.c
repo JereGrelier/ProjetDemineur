@@ -78,8 +78,6 @@ void PrintWin() {
     DisplayGrid();
     printf("You Win\n");
     system("paplay ./assets/GG.wav &");
-    printf("Press Return to Continue\n");  
-    getchar();
     handleEndGame();
 }
 
@@ -89,8 +87,6 @@ void handleLoose() {
     printf("Here is the full grid\n");
     system("paplay ./assets/loose.wav &");
     DisplayGrid();
-    printf("Press Return to Continue\n");  
-    getchar();
     handleEndGame();
 }
 
