@@ -20,6 +20,10 @@
 extern Grid *grid;
 int mineToPlace;
 
+void printNInGrid(int h, int w) {
+    printf("The case at x=%d and y=%d is not in the grid, please retry\n", h, w);
+}
+
 bool isInGrid(int h, int w)
 {
     if (
@@ -28,6 +32,7 @@ bool isInGrid(int h, int w)
         w < 0 ||
         w >= grid->width)
     {
+        printNInGrid(h,w);
         return false;
     }
     return true;

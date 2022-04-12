@@ -51,6 +51,14 @@ sommet createSommet();
 bool isInGrid(int h, int w);
 
 /**
+ * @brief 
+ * 
+ * @param h 
+ * @param w 
+ */
+void PrintNInGrid(int h, int w);
+
+/**
  * @brief Place randomly nbMines mines on the grid
  * 
  * @param nbMines 
