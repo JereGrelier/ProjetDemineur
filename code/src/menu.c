@@ -23,15 +23,15 @@ int checkInt(int low_inter, int high_inter) {
     while(res == 0) {
         if (fgets(tmp, 100, stdin) != NULL){
             //printf("len=%d\n", strlen(tmp)); // qd on regarde la taille on est toujours a + 1 car fgets ajoute  \n\0 --> le \n est compté
-            if(strlen(tmp) > 3) {
+            if(strstr(tmp, "exit")){
+                printf("Bye!\n");
+                _Exit(0);
+            }
+            else if(strlen(tmp) > 3) {
                 printf("Not a valid number, please retry\n==>");
                 if(strlen(tmp) == 99) {
                     viderBuffer();
                 }
-            }
-            else if(strstr(tmp, "exit")){
-            printf("Bye!\n");
-                _Exit(0);
             }
             else {
                 res = atoi(tmp);
@@ -94,6 +94,7 @@ int config_game(){
     printf("General Game mode selected = %s\n\n", game_mode == 1 ? "manual" : "automatic");
 
     if (game_mode == 1){
+        printf("-----------------\n\n");
         printf("RECAP \n");
         printf("Grid Length = %d\n", grid_length);
         printf("Grid Width = %d\n", grid_width);
