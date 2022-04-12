@@ -46,22 +46,19 @@ void AutoReveal(int h, int w) {
 }
 
 void Reveal(int h, int w) {
-    if(isInGrid(h-1,w-1)){
-        printf("Revealing the cell at %d ; %d\n", h, w);
-        h--;
-        w--;
-        if (grid->sommet[h][w].mined)
-        {
-            handleLoose();
-        }
-        grid->sommet[h][w].state = 1;
-        if (!grid->sommet[h][w].nbMineAround)
-        {
-            autoRevealWhenNoMinesAround(h,w);
-        }
-        
-        DisplayGrid();
+    printf("Revealing the cell at %d ; %d\n", h, w);
+    h--;
+    w--;
+    if (grid->sommet[h][w].mined)
+    {
+        handleLoose();
     }
+    grid->sommet[h][w].state = 1;
+    if (!grid->sommet[h][w].nbMineAround)
+    {
+        autoRevealWhenNoMinesAround(h,w);
+    }
+    DisplayGrid();
 }
 
 //TODO : MVC

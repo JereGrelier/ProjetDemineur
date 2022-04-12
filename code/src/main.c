@@ -24,7 +24,7 @@ int main() {
         x = checkInt();
         printf("\ny? ==>");
         y = checkInt();
-        if(isInGrid(x,y))
+        if(isInGrid(x-1,y-1))
             Reveal(x,y);
         else
             continue;

@@ -14,7 +14,6 @@
 #include <time.h>
 #include "../include/grid.h"
 #include "../include/menu.h"
-#include <unistd.h> // to use sleep for debug
 
 //Global Variables
 
