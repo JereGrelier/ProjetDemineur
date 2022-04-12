@@ -5,6 +5,7 @@ int width;
 int nbMines;
 
 int main() {
+    system("clear");
     printf("SIZE OF THE GRID : \n");
     printf("x? ==>"); 
     height = checkInt();

@@ -14,6 +14,7 @@
 #include <time.h>
 #include "../include/grid.h"
 #include "../include/menu.h"
+#include <unistd.h> // to use sleep for debug
 
 //Global Variables
 
@@ -33,6 +34,7 @@ bool isInGrid(int h, int w)
         w >= grid->width)
     {
         printNInGrid(h,w);
+        sleep(3);
         return false;
     }
     return true;
