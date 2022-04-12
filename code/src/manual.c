@@ -78,7 +78,7 @@ void PrintWin() {
     RevealAll();
     DisplayGrid();
     printf("You Win\n");
-    system("paplay ./assets/GG.wav &");
+    system("cvlc --play-and-exit ./assets/GG.wav 2> /dev/null &");
     handleEndGame();
 }
 
@@ -86,7 +86,7 @@ void handleLoose() {
     printf("You lost\n");
     RevealAll();
     printf("Here is the full grid\n");
-    system("paplay ./assets/loose.wav &");
+    system("cvlc --play-and-exit ./assets/loose.wav 2> /dev/null &");
     DisplayGrid();
     handleEndGame();
 }
