@@ -75,70 +75,52 @@ void check_int_input(char *N, int low_inter, int high_inter){
 
 int config_game(){
     printf("\n--------- CONFIGURATION ---------\n");
+    
+    printf("Grid Length ? :>");
+    grid_length = checkInt(1,30); // Length max = 30 
+    printf("Length=%d\n", grid_length);
+
+    printf("\nWidth ? :>");
+    grid_width = checkInt(1,24); // Width max = 24
+    printf("Width=%d\n", grid_width);
+
+    printf("Number of Mines ? :>");
+    mine_number = checkInt(1,grid_length*grid_width/2);
+    printf("Mine Number=%d\n", mine_number);
+
+    
     printf("General Game mode : 1. manual | 2. automatic\n:>");
     game_mode = checkInt(1,2);
     printf("General Game mode selected = %s\n\n", game_mode == 1 ? "manual" : "automatic");
 
-    if (game_mode == 2){ // auto game mode
+    if (game_mode == 1){
+        printf("RECAP \n");
+        printf("Grid Length = %d\n", grid_length);
+        printf("Grid Width = %d\n", grid_width);
+        printf("Number of Mines = %d\n", mine_number);
+        return 0;
+
+    } else if (game_mode == 2){ // auto game mode
+    printf("-----------------\n\n");
+    printf("Automatic Game Mode : 1. spectator | 2. statistics\n:>");
+    auto_game_mode = checkInt(1,2);
+
+    printf("Automatic Game mode selected = %s\n\n", auto_game_mode == 1 ? "spectator" : "statistics");
+    if (auto_game_mode == 2){ //stats game mode
         printf("-----------------\n\n");
-        printf("Automatic Game Mode : 1. spectator | 2. statistics\n:>");
-        auto_game_mode = checkInt(1,2);
-        printf("Automatic Game mode selected = %s\n\n", auto_game_mode == 1 ? "spectator" : "statistics");
+        printf("Please choose the number of games on which stats will be made\n:>");
+        nb_games = checkInt(1,20); // 20 games max
+        printf("Number of Games = %d\n", nb_games);
 
-        if (auto_game_mode == 2){ //stats game mode
-            printf("-----------------\n\n");
-            printf("Please choose the number of games on which stats will be made\n:>");
-            nb_games = checkInt(1,20); // 20 games max
-            printf("Number of Games = %d\n", nb_games);
-
-            printf("Grid Length ? :>");
-            grid_length = checkInt(1,30); // Length max = 30 
-            printf("Length=%d\n", grid_length);
-
-            printf("\nWidth ? :>");
-            grid_width = checkInt(1,24); // Width max = 24
-            printf("Width=%d\n", grid_width);
-
-            printf("Number of Mines ? :>");
-            mine_number = checkInt(1,grid_length*grid_width/2);
-            printf("Mine Number=%d\n", mine_number);
-
-            printf("-----------------\n\n");
-            printf("RECAP \n");
-            printf("Number of Games = %d\n", nb_games);
-            printf("Grid Length=%d\n", grid_length);
-            printf("Grid Width=%d\n", grid_width);
-
-            printf("Number of Mines =%d\n", mine_number);
-
-            _Exit(0);
+        printf("-----------------\n\n");
+        printf("RECAP \n");
+        printf("Number of Games = %d\n", nb_games);
+        printf("Grid Length = %d\n", grid_length);
+        printf("Grid Width = %d\n", grid_width);
+        printf("Number of Mines = %d\n", mine_number);
+        _Exit(0);
         }
     }
-    /*
-    printf("-----------------\n\n");
-    
-    
-    printf("Please choose the size of the grid : \n");
-
-    printf("Length ? :>");
-    scanf("%s", &grid_length);
-    printf("str length=%s\n", &grid_length);
-    check_int_input(&grid_length, 1, 30); // Length max = 30
-    fflush(stdin);
-
-    printf("\nWidth ? :>");
-    scanf("%s", &grid_width);
-    printf("str width=%s\n", &grid_width);
-    check_int_input(&grid_width, 1, 24); // Width max = 24
-        
-    fflush(stdin);
-
-    printf("\nFinal Length=%s\n", (&grid_length+2)); // avec +2 ça fonctionne ?? pourquoi ??
-    printf("Final Width=%s\n", &grid_width);
-
-    _Exit(0);
-    }
-    */
     _Exit(0);
 }
 
