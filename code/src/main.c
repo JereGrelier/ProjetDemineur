@@ -19,15 +19,23 @@ int main() {
     {
         system("clear");
         DisplayGrid();
-        flagCell();
+        bool doFlag = flagCell();
         printf("x? ==>"); 
         x = checkInt();
         printf("\ny? ==>");
         y = checkInt();
-        if(isInGrid(x-1,y-1))
-            Reveal(x,y);
-        else
-            continue;
+        if(doFlag){
+            if(isInGrid(x-1,y-1))
+                handleFlag(x-1,y-1);
+            else
+                continue;
+        }
+        else{
+            if(isInGrid(x-1,y-1))
+                Reveal(x-1,y-1);
+            else
+                continue;
+        }
         checkWin();
     }
     return 0;

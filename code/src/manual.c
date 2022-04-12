@@ -17,7 +17,6 @@
 Grid *grid;
 
 void autoRevealWhenNoMinesAround(int h, int w) {
-    printf("x=%d & y=%d\n", h, w);
     for (int i = -1; i <= 1; i++)
     {
         for (int j = -1; j <= 1; j++)
@@ -45,9 +44,7 @@ void AutoReveal(int h, int w) {
 }
 
 void Reveal(int h, int w) {
-    printf("Revealing the cell at %d ; %d\n", h, w);
-    h--;
-    w--;
+
     if (grid->sommet[h][w].mined)
     {
         handleLoose();
@@ -61,36 +58,15 @@ void Reveal(int h, int w) {
 }
 
 //TODO : MVC
-void flagCell() {
+bool flagCell() {
     printf("Do you want to flag a cell\n1. No\n2. Yes\n==> ");
     int a = checkInt();
-    switch (a) {
-        case 1:
-            return;
-        case 2: {
-            printf("Flagging...\n");
-            printf("x? ==>"); 
-            int x = checkInt();
-            printf("\ny? ==>");
-            int y = checkInt();
-            if(isInGrid(x,y))
-                handleFlag(x,y);
-            else {
-                printf("Erreur dans la saisie de la case\n");
-                break;
-            }
-            DisplayGrid();
-            break;
-        }
-        default:
-            break;
-    }
-    flagCell(grid);
+    if(a == 2)
+        return true;
+    return false;
 }
 
 void handleFlag(int h, int w){
-    h--;
-    w--;
     if(grid->sommet[h][w].state != 2)
         grid->sommet[h][w].state = 2;
 }

@@ -1,5 +1,5 @@
 /**
- * @file grid->c
+ * @file grid.c
  * @author Jeremy Grelier (jeremy.grelier@enseirb-matmeca.fr)
  * @brief The source file for the grid and cells
  * @version 0.5
@@ -32,7 +32,6 @@ bool isInGrid(int h, int w)
         w < 0 ||
         w >= grid->width)
     {
-        printNInGrid(h,w);
         return false;
     }
     return true;
@@ -66,7 +65,7 @@ void CreateGrid(int h, int w, int nbMines) {
     grid->width = w;
     grid->nbMines = nbMines;
     grid->sommet = (sommet **)malloc(grid->height * sizeof(sommet));
-    printf(" H : %d\n W : %d\n NbMines : %d\n", grid->height, grid->width, grid->nbMines);
+    //printf(" H : %d\n W : %d\n NbMines : %d\n", grid->height, grid->width, grid->nbMines);
     mineToPlace = nbMines;
     for (int i = 0; i < grid->height; i++)
     {
@@ -94,7 +93,6 @@ void placeMines(int nbMines) {
         int w = rand() % grid->width;
         if (!grid->sommet[h][w].mined)
         {
-            printf("Mines to place : %d\n", nbMines);
             grid->sommet[h][w].mined = true;
             nbMines--;
         }  
