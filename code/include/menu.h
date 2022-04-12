@@ -8,6 +8,10 @@ extern unsigned int game_mode, auto_game_mode, nb_games, grid_length, grid_width
  * 
  */
 void welcome();
+void viderBuffer();
+int checkInt(int low_inter, int high_inter);
+
+
 
 /**
  * @brief Choose game mode, grid length, nb mines ...}
