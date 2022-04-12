@@ -1,4 +1,4 @@
-#YOANN DECOMMENTE LES FICHIERS QUAND LE P*TAIN DE MENU EST FONCTIONNEL
+#YOANN DECOMMENTE LES FICHIERS QUAND LE P*TAIN DE MENU EST FONCTIONNEL (et pense a mettre les global en extern...)
 
 LDFLAGS = -Lmine 
 CFLAGS = -I./include -Wall
@@ -9,7 +9,7 @@ CFLAGS = -I./include -Wall
 all: game
 
 
-game: bin/main.o bin/grid.o bin/manual.o #bin/menu.o
+game: bin/main.o bin/grid.o bin/manual.o bin/end.o #bin/menu.o
 	c99 -o $@ $^  $(LDFLAGS) -ggdb -O0
 
 bin/%.o : src/%.c include/grid.h include/manual.h
@@ -18,7 +18,7 @@ bin/%.o : src/%.c include/grid.h include/manual.h
 clean:
 	rm -rf grid && cd bin && rm -rf *;
 
-dynlibmine: bin/grid.o #bin/menu.o
+dynlibmine: bin/grid.o bin/end.o #bin/menu.o
 	gcc -shared $^ -o lib/libmine.so
 
 doc:
