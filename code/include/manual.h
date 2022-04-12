@@ -64,4 +64,11 @@ void Reveal(int h, int w);
 void AutoReveal(int h, int w);
 
 void RevealAll();
+
+/**
+ * @brief The main function for manual games
+ * 
+ */
+void handleManualGame();
+
 #endif
