@@ -59,7 +59,7 @@ void getNbSurrondingMines(int h, int w)
 }
 
 void CreateGrid(int h, int w, int nbMines) {
-    srand((time_t)NULL);
+    srand((time)NULL);
     grid = malloc(sizeof(Grid));
     grid->height = h;
     grid->width = w;
