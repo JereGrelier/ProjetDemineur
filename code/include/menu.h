@@ -25,14 +25,13 @@ void welcome();
  */
 void viderBuffer();
 
-
-
 /**
- * @brief Used to check if the input submited by the user is correct
- * 
+ * @brief Used to check if the input (number) submited by the user is included between the value interval [low_inter ; high_inter]
+ * @param low_inter: Low interval number : must be >0
+ * @param high_inter: High interval number : must be >0
+ * @return a correct input based on user's choice
  */
 int checkInt(int low_inter, int high_inter);
-
 
 /**
  * @brief Choose game mode, grid length, number of mines ...
