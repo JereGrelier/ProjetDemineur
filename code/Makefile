@@ -7,7 +7,7 @@ CFLAGS = -I./include -Wall
 all: game
 
 
-game: bin/main.o dynlibmine
+game: bin/main.o bin/grid.o bin/end.o bin/menu.o bin/manual.o
 	c99 -o $@ $^  $(LDFLAGS) -ggdb -O0
 
 bin/%.o : src/%.c include/grid.h include/manual.h
