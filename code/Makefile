@@ -7,7 +7,7 @@ CFLAGS = -I./include -Wall
 all: game
 
 
-game: bin/main.o bin/grid.o bin/manual.o bin/end.o bin/menu.o
+game: bin/main.o dynlibmine
 	c99 -o $@ $^  $(LDFLAGS) -ggdb -O0
 
 bin/%.o : src/%.c include/grid.h include/manual.h
@@ -17,7 +17,7 @@ clean:
 	rm -rf grid && cd bin && rm -rf *;
 
 dynlibmine: bin/grid.o bin/end.o bin/menu.o bin/manual.o
-	gcc -shared $^ -o lib/libmine.so
+	mkdir -p lib && gcc -shared $^ -o lib/libmine.so
 
 doc:
 	cd doc && doxygen && cd latex && make;
