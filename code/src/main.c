@@ -4,9 +4,7 @@
 unsigned int game_mode, auto_game_mode, nb_games, grid_length, grid_width, mine_number;
 
 int main(int argc, char* charv[]) {
-    system("clear");
-    welcome();
-    CreateGrid(grid_length, grid_width, mine_number);
+    begin();
     if (!game_mode-1)
     {
         handleManualGame();

@@ -150,3 +150,9 @@ void welcome(){
         welcome();
     } */
 }
+
+void begin(){
+    system("clear");
+    welcome();
+    CreateGrid(grid_length, grid_width, mine_number);
+}

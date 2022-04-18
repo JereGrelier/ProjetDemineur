@@ -20,5 +20,10 @@ int checkInt(int low_inter, int high_inter);
  */
 int config_game();
 
+/**
+ * @brief The function to start configuring the game
+ * 
+ */
+void begin();
 
 #endif /*MENU_H*/

@@ -2,10 +2,16 @@
 #include <stdio.h>
 #include "../include/end.h"
 #include "../include/menu.h"
+#include "../include/manual.h"
+
+unsigned int game_mode, auto_game_mode, nb_games, grid_length, grid_width, mine_number;
 
 void handleReplay() {
-    printf("SoonTm\n");
-    _Exit(0);
+    CreateGrid(grid_length, grid_width, mine_number);
+    if (!game_mode-1)
+    {
+        handleManualGame();
+    }
 }
 
 void handleEndGame() {
@@ -21,6 +27,7 @@ void handleEndGame() {
         handleReplay();
         break;
     case 2:
+        begin();
         break;
     case 3:
         system("clear");
