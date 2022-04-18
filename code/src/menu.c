@@ -7,7 +7,7 @@
 #include "../include/grid.h"
 
 //Global vars : AJOUTER extern UNE FOIS LE PROG FONCTIONNEL! 
-extern unsigned int game_mode, auto_game_mode, nb_games, 
+unsigned int game_mode, auto_game_mode, nb_games, 
     grid_length, grid_width, mine_number;
 
 void viderBuffer(){
@@ -51,28 +51,6 @@ int checkInt(int low_inter, int high_inter) {
     }
     return res;
 }
-/*
-void check_int_input(char *N, int low_inter, int high_inter){
-    int ii = 0;
-    while (1) {
-        fflush(stdin);
-        ii = atoi(N); //if choice is a str : i == 0
-        //printf("i=%d\n", i);
-        //printf("*N=%s\n", N); //%s va chercher le *N
-        //printf("Low : %d & High : %d\n", low_inter, high_inter);
-        if(ii>=low_inter && ii<=high_inter){
-            //printf("check input result=%d\n",ii);
-            // *N = i + '0';
-            //printf("*N = %s \n", N);
-            return;
-	    } else {
-            printf("Error, please select a digit between %d and %d\n", 
-            low_inter, high_inter);
-            scanf("%s", N);
-            ii = atoi(N);
-        }
-    }
-} */
 
 void config_game(){
     printf("\n--------- CONFIGURATION ---------\n");
