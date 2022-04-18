@@ -1,3 +1,13 @@
+/**
+ * @file main.c
+ * @author Jeremy Grelier (jeremy.grelier@enseirb-matmeca.fr)
+ * @brief The main file for the game
+ * @version 0.1
+ * @date 2022-04-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "../include/manual.h"
 #include "../include/menu.h"
 

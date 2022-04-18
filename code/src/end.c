@@ -1,3 +1,13 @@
+/**
+ * @file end.c
+ * @author Jeremy Grelier (jeremy.grelier@enseirb-matmeca.fr)
+ * @brief The file which handles the end of the game
+ * @version 0.1
+ * @date 2022-04-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include "../include/end.h"

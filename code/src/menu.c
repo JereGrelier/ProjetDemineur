@@ -1,3 +1,14 @@
+/**
+ * @file menu.c
+ * @author Yoann Da Silva (ydasilva@enseirb-matmeca.fr)
+ * @brief The file which handles the main menu
+ * @version 0.1
+ * @date 2022-04-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include<stdio.h>
 #include <stdlib.h> //atoi
 #include<menu.h>
