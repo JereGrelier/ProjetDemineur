@@ -27,8 +27,7 @@ void check_int_input(char *N, int low_inter, int high_inter){
     }
 } */
 
-int config_game(int *g_mode, int *auto_g_mode, int *s_mode,
-int *size, int *m_number){
+int config_game(int *g_mode){
     printf("--------- CONFIGURATION ---------\n");
     printf("Game mode : 1. manual | 2. automatic\n");
     return 0;
