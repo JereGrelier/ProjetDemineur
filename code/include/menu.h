@@ -1,3 +1,13 @@
+/**
+ * @file menu.h
+ * @author Yoann Da Silva (ydasilva@enseirb-matmeca.fr)
+ * @brief The source file to handle the main menu
+ * @version 0.1
+ * @date 2022-04-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef MENU_H
 #define MENU_H
 

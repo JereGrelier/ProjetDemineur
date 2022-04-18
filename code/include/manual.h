@@ -1,3 +1,13 @@
+/**
+ * @file manual.h
+ * @author Jeremy Grelier (jeremy.grelier@enseirb-matmeca.fr)
+ * @brief The source file to handle manual games
+ * @version 0.1
+ * @date 2022-04-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef MANUAL_H
 #define MANUAL_H
 #include <stdlib.h>

@@ -1,3 +1,13 @@
+/**
+ * @file grid.h
+ * @author  Jeremy Grelier (Jeremy Grelier@enseirb-matmeca.fr)
+ * @brief The source file for the grid & cells
+ * @version 0.1
+ * @date 2022-04-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef GRID_H
 #define GRID_H
 #include <stdlib.h>
@@ -11,17 +21,39 @@ typedef struct grid Grid;
  */
 struct sommet
 {
+    /**
+     * @brief The number of mines around the cell
+     * 
+     */
     int nbMineAround;
+
     bool mined;
-    int state; // 1 if discovered, 2 if flagged, 0 else
+
+    /**
+     * @brief 1 if discovered, 2 if flagged, 0 else
+     * 
+     */
+    int state;
 };
 
 struct grid {
+    /**
+     * @brief A 2 dimension matrix for the cells, a cell is called with "grid[h][w]"
+     * 
+     */
     sommet ** sommet;
+
     int height;
+
     int width;
+
+    /**
+     * @brief The total number of mines in the grid
+     * 
+     */
     int nbMines;
 };
+
 /**
  * @brief Create a Grid
  * 
