@@ -4,7 +4,7 @@
 
 ## Lancement du programme
 
-Pour lancer le programme il suffit d'aller dans le répertoire code, de faire make puis de lancer l'executable game.
+Pour lancer le programme il suffit d'aller dans le répertoire code, de faire "make dynlibmine" puis "make" et enfin de lancer l'executable game.
 
 Le mode de jeu automatique n'étant pas implémenté, si il est choisi, le programme s'arrètera.
 
