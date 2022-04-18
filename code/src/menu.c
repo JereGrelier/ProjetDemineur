@@ -105,7 +105,6 @@ void config_game(){
 
 void welcome(){
     unsigned int choice;
-    //int i;
     printf("======================\n");
     printf("****** 1. Play  ******\n");
     printf("****** 2. Exit  ******\n");
@@ -121,12 +120,7 @@ void welcome(){
     } else if (choice == 2){
         printf("Bye!\n");
         _Exit(0); //quit properly
-    } /* else {
-        printf("Error, please select either 1 or 2\n");
-        sleep(2); //read error msg
-        system("clear"); //system(): exec bash cmds
-        welcome();
-    } */
+    }
 }
 
 void begin(){
