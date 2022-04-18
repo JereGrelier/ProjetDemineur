@@ -16,7 +16,7 @@ bin/%.o : src/%.c include/grid.h include/manual.h
 clean:
 	rm -rf grid && cd bin && rm -rf *;
 
-dynlibmine: bin/grid.o bin/end.o bin/menu.o
+dynlibmine: bin/grid.o bin/end.o bin/menu.o bin/manual.o
 	gcc -shared $^ -o lib/libmine.so
 
 doc:
