@@ -4,6 +4,7 @@
 #include <ctype.h> 
 #include <unistd.h> // to use sleep for debug
 #include <string.h> //strlen
+#include "../include/grid.h"
 
 //Global vars : AJOUTER extern UNE FOIS LE PROG FONCTIONNEL! 
 unsigned int game_mode, auto_game_mode, nb_games, 
@@ -73,7 +74,7 @@ void check_int_input(char *N, int low_inter, int high_inter){
     }
 } */
 
-int config_game(){
+void config_game(){
     printf("\n--------- CONFIGURATION ---------\n");
     
     printf("Grid Length ? :>");
@@ -99,7 +100,7 @@ int config_game(){
         printf("Grid Length = %d\n", grid_length);
         printf("Grid Width = %d\n", grid_width);
         printf("Number of Mines = %d\n", mine_number);
-        return 0;
+        return;
 
     } else if (game_mode == 2){ // auto game mode
     printf("-----------------\n\n");
@@ -119,10 +120,9 @@ int config_game(){
         printf("Grid Length = %d\n", grid_length);
         printf("Grid Width = %d\n", grid_width);
         printf("Number of Mines = %d\n", mine_number);
-        _Exit(0);
         }
     }
-    _Exit(0);
+    return;
 }
 
 void welcome(){
