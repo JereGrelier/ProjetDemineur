@@ -14,12 +14,16 @@ void handleReplay() {
     }
 }
 
-void handleEndGame() {
+void DisplayEnd() {
     printf("\n\n");
     printf("What do you want to do?\n");
     printf("1. Replay with same parameters\n");
     printf("2. Go back to main menu\n");
     printf("3. Exit the game\n ==>");
+}
+
+void handleEndGame() {
+    DisplayEnd();
     int choice = checkInt(1,3);
     switch (choice)
     {
