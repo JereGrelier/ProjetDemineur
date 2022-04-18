@@ -6,7 +6,6 @@
 #include <string.h> //strlen
 #include "../include/grid.h"
 
-//Global vars : AJOUTER extern UNE FOIS LE PROG FONCTIONNEL! 
 unsigned int game_mode, auto_game_mode, nb_games, 
     grid_length, grid_width, mine_number;
 
